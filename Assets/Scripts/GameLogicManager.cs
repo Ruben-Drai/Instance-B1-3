@@ -6,16 +6,21 @@ public class GameLogicManager : MonoBehaviour
 {
     [SerializeField]
     private VideoPlayerManager videoPlayer;
+    private GameObject defaultVideo;
 
     private bool isInQTE = false;
     private bool isInPnC = false;
+
     private Coroutine Action;
     private KeyInputs KeyInputs;
     private List<TouchInputs> TouchInputs;
+
     private float ActionDuration = 0f;
     private float ActionTime = 0f;
     private double ActionEnd = 0f;
+
     // Start is called before the first frame update
+
     public static GameObject instance;
     void Start()
     {
@@ -26,6 +31,7 @@ public class GameLogicManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Video.instance.GetComponent<Video>().CheckAction();
         if (isInQTE && Action == null)
         {
             Action = StartCoroutine("QTE_Routine");
@@ -35,7 +41,7 @@ public class GameLogicManager : MonoBehaviour
             Action = StartCoroutine("PnC_Routine");
         }
     }
-    public void RequestQTE(float duration, double EndTime, KeyInputs keys)
+    public void RequestQTE(float duration, double EndTime, KeyInputs keys, GameObject defaultScene)
     {
         ActionTime = 0f;
         ActionDuration = duration;
@@ -43,15 +49,18 @@ public class GameLogicManager : MonoBehaviour
         isInPnC = false;
         KeyInputs = keys;
         ActionEnd = EndTime;
+        defaultVideo = defaultScene;
+
     }
 
-    public void RequestPnC(float duration, List<TouchInputs> Touch)
+    public void RequestPnC(float duration, List<TouchInputs> Touch, GameObject defaultScene)
     {
         ActionTime = 0f;
         ActionDuration = duration;
         isInQTE = false;
         isInPnC = true;
         TouchInputs = Touch;
+        defaultVideo = defaultScene;
     }
 
     private IEnumerator QTE_Routine()
@@ -69,22 +78,29 @@ public class GameLogicManager : MonoBehaviour
             if (heldKeys >= KeyInputs.keys.Count)
             {
                 //Do thing if keys are held then exits coroutine by breaking out of the while loop
+                if(KeyInputs.isLeading)
+                {
+                    Destroy(Video.instance);
+                    Video.instance = Instantiate(KeyInputs.prefab);
+                }
                 break;
             }
             else if (ActionTime >= ActionDuration)
             {
                 //Do thing if the QTE was a failure then exits coroutine by breaking out of the while loop
+                Destroy(Video.instance);
+                Video.instance = Instantiate(defaultVideo);
                 break;
             }
         }
         //exits the coroutine
         videoPlayer.ChangeSpeed(1);
+        Video.currentActionIndex = 0;
         yield return null;
     }
 
     private IEnumerator PnC_Routine()
     {
-        //finds correct speed so that when the QTE ends, it ends at the target time in the video
         videoPlayer.ChangeSpeed(0);
         while (isInPnC)
         {
@@ -99,7 +115,13 @@ public class GameLogicManager : MonoBehaviour
                     {
                         if (hit.transform.gameObject == TouchInputs[i].button.gameObject)
                         {
-                            Debug.Log("clicked");
+                            //do thing if hitbox is clicked
+                            if(TouchInputs[i].isLeading)
+                            {
+                                Debug.Log("clicked");
+                                Destroy(Video.instance);
+                                Video.instance = Instantiate(TouchInputs[i].prefab);
+                            }
                             goto ext;
                         }
                     }
@@ -109,6 +131,8 @@ public class GameLogicManager : MonoBehaviour
             else if (ActionTime >= ActionDuration)
             {
                 //Do thing if the PnC was a failure then exits coroutine by breaking out of the while loop
+                Destroy(Video.instance);
+                Video.instance = Instantiate(defaultVideo);
                 break;
             }
             
@@ -116,6 +140,7 @@ public class GameLogicManager : MonoBehaviour
         //exits the coroutine
         ext:;
         videoPlayer.ChangeSpeed(1);
+        Video.currentActionIndex = 0;
         yield return null;
     }
 }

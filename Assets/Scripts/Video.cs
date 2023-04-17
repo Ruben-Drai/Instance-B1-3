@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Video;
@@ -11,7 +10,7 @@ public class Video : MonoBehaviour
     public static GameObject instance;
 
     private VideoPlayer player;
-    private int currentActionIndex = 0;
+    public static int currentActionIndex = 0;
     void Start()
     {
         if (instance == null) instance = gameObject;
@@ -32,12 +31,17 @@ public class Video : MonoBehaviour
                 GameLogicManager.instance.GetComponent<GameLogicManager>().RequestQTE(
                     actionList[currentActionIndex].ActionDuration,
                     actionList[currentActionIndex].ActionEnd,
-                    actionList[currentActionIndex].KeyInputs
+                    actionList[currentActionIndex].KeyInputs,
+                    actionList[currentActionIndex].defaultVideo
                     );
             }
             else
             {
-                GameLogicManager.instance.GetComponent<GameLogicManager>().RequestPnC(actionList[currentActionIndex].ActionDuration, actionList[currentActionIndex].TouchInputs);
+                GameLogicManager.instance.GetComponent<GameLogicManager>().RequestPnC(
+                    actionList[currentActionIndex].ActionDuration, 
+                    actionList[currentActionIndex].TouchInputs,
+                    actionList[currentActionIndex].defaultVideo
+                    );
             }
             currentActionIndex++;
         }
@@ -45,6 +49,7 @@ public class Video : MonoBehaviour
     [System.Serializable]
     public struct Action
     {
+        public GameObject defaultVideo;
         public ActionType type;
         public double ActionStart;
         public double ActionEnd;
@@ -63,6 +68,8 @@ public class Video : MonoBehaviour
 [System.Serializable]
 public struct KeyInputs
 {
+    //TODO: make it so that you can add "dependencies", meaning doing this action will affect the reputation system or collect an object
+    //or on the contrary, that the prefab that gets loaded is different depending on current rep or collected items
     public List<KeyCode> keys;
     public bool isLeading;
     public GameObject prefab;
@@ -70,6 +77,8 @@ public struct KeyInputs
 [System.Serializable]
 public struct TouchInputs
 {
+    //TODO: make it so that you can add "dependencies", meaning doing this action will affect the reputation system or collect an object
+    //or on the contrary, that the prefab that gets loaded is different depending on current rep or collected items
     public PolygonCollider2D button;
     public bool isLeading;
     public GameObject prefab;
