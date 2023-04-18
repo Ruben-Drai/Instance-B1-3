@@ -13,6 +13,10 @@ public class Video : MonoBehaviour
     public static int currentActionIndex = 0;
     void Start()
     {
+        player = GetComponent<VideoPlayer>();
+    }
+    private void Awake()
+    {
         if (instance == null) instance = gameObject;
         else Destroy(gameObject);
     }
@@ -24,23 +28,27 @@ public class Video : MonoBehaviour
     }
     public void CheckAction()
     {
-        if (Mathf.Abs((float)(player.time - actionList[currentActionIndex].ActionStart)) < 1f)
+        if (actionList?.Count > currentActionIndex && player.time == actionList[currentActionIndex].ActionStart)
         {
             if (actionList[currentActionIndex].type == ActionType.QTE)
             {
                 GameLogicManager.instance.GetComponent<GameLogicManager>().RequestQTE(
                     actionList[currentActionIndex].ActionDuration,
                     actionList[currentActionIndex].ActionEnd,
+                    actionList[currentActionIndex].ActionStart,
                     actionList[currentActionIndex].KeyInputs,
-                    actionList[currentActionIndex].defaultVideo
+                    actionList[currentActionIndex].defaultVideo,
+                    actionList[currentActionIndex].HasDefault
                     );
             }
             else
             {
                 GameLogicManager.instance.GetComponent<GameLogicManager>().RequestPnC(
                     actionList[currentActionIndex].ActionDuration, 
+                    actionList[currentActionIndex].ActionStart, 
                     actionList[currentActionIndex].TouchInputs,
-                    actionList[currentActionIndex].defaultVideo
+                    actionList[currentActionIndex].defaultVideo,
+                    actionList[currentActionIndex].HasDefault
                     );
             }
             currentActionIndex++;
@@ -49,6 +57,7 @@ public class Video : MonoBehaviour
     [System.Serializable]
     public struct Action
     {
+        public bool HasDefault;
         public GameObject defaultVideo;
         public ActionType type;
         public double ActionStart;
@@ -63,6 +72,15 @@ public class Video : MonoBehaviour
     {
         QTE,
         PnC,
+    }
+    
+    public static void ChangeSpeed(float playackSpeed)
+    {
+        instance.GetComponent<VideoPlayer>().playbackSpeed = playackSpeed;
+    }
+    public static double GetCurrentTime()
+    {
+        return instance.GetComponent<VideoPlayer>().time;
     }
 }
 [System.Serializable]
