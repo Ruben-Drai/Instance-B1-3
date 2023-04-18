@@ -4,15 +4,19 @@ using UnityEngine.Video;
 
 public class Video : MonoBehaviour
 {
+
     public List<Action> actionList;    
-    public static GameObject instance;
     public static int currentActionIndex = 0;
 
     private VideoPlayer player;
+
+    public static GameObject instance;
     private void Awake()
     {
+        //Singleton stuff
         if (instance == null) instance = gameObject;
         else Destroy(gameObject);
+        //Get Video
         player = GetComponent<VideoPlayer>();
     }
 
@@ -23,8 +27,10 @@ public class Video : MonoBehaviour
     }
     public void CheckAction()
     {
+        //Checks when the action needs to be launched, Caution: Put actions in chronological order in the list
         if (player!=null && actionList?.Count > currentActionIndex && player.time == actionList[currentActionIndex].ActionStart)
         {
+            //checks action type and requests appropriate action to be launched to the Game
             if (actionList[currentActionIndex].type == ActionType.QTE)
             {
                 GameLogicManager.instance.GetComponent<GameLogicManager>().RequestQTE(
@@ -46,6 +52,7 @@ public class Video : MonoBehaviour
                     actionList[currentActionIndex].HasDefault
                     );
             }
+            //increases index to read next action in list next time
             currentActionIndex++;
         }
     }
@@ -83,6 +90,7 @@ public class Video : MonoBehaviour
         return null;
     }
 }
+
 [System.Serializable]
 public struct KeyInputs
 {
@@ -92,6 +100,7 @@ public struct KeyInputs
     public bool isLeading;
     public GameObject prefab;
 }
+
 [System.Serializable]
 public struct TouchInputs
 {
@@ -100,5 +109,4 @@ public struct TouchInputs
     public PolygonCollider2D button;
     public bool isLeading;
     public GameObject prefab;
-    
 }
