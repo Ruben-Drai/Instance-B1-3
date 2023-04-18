@@ -131,7 +131,6 @@ public class GameLogicManager : MonoBehaviour
                             //do thing if hitbox is clicked
                             if (TouchInputs[i].isLeading)
                             {
-                                
                                 Destroy(Video.instance);
                                 Video.instance = Instantiate(TouchInputs[i].prefab);
                             }

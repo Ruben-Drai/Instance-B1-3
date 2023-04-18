@@ -4,12 +4,11 @@ using UnityEngine.Video;
 
 public class Video : MonoBehaviour
 {
-    public List<Action> actionList;
-
+    public List<Action> actionList;    
     public static GameObject instance;
+    public static int currentActionIndex = 0;
 
     private VideoPlayer player;
-    public static int currentActionIndex = 0;
     private void Awake()
     {
         if (instance == null) instance = gameObject;
@@ -53,28 +52,26 @@ public class Video : MonoBehaviour
     [System.Serializable]
     public struct Action
     {
+        public ActionType type;
         public bool HasDefault;
         public GameObject defaultVideo;
-        public ActionType type;
         public double ActionStart;
         public double ActionEnd;
         public float ActionDuration;
         public List<KeyInputs> KeyInputs;
         public List<TouchInputs> TouchInputs;
     }
-    
-    
     public enum ActionType
     {
         QTE,
         PnC,
     }
     
-    public static void ChangeSpeed(float playackSpeed)
+    public static void ChangeSpeed(float playbackSpeed)
     {
         VideoPlayer player = instance.GetComponent<VideoPlayer>();
         if(player!=null)
-            player.playbackSpeed = playackSpeed;
+            player.playbackSpeed = playbackSpeed;
 
     }
     public static double? GetCurrentTime()
@@ -94,6 +91,7 @@ public struct KeyInputs
     public List<KeyCode> keys;
     public bool isLeading;
     public GameObject prefab;
+    
 }
 [System.Serializable]
 public struct TouchInputs
@@ -103,4 +101,5 @@ public struct TouchInputs
     public PolygonCollider2D button;
     public bool isLeading;
     public GameObject prefab;
+    
 }
