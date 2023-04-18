@@ -24,7 +24,7 @@ public class Video : MonoBehaviour
     }
     public void CheckAction()
     {
-        if (Mathf.Abs((float)(player.time - actionList[currentActionIndex].ActionStart)) < 1f)
+        if (actionList?.Count > currentActionIndex && Mathf.Abs((float)(player.time - actionList[currentActionIndex].ActionStart)) < 1f)
         {
             if (actionList[currentActionIndex].type == ActionType.QTE)
             {
