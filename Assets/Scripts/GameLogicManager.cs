@@ -13,7 +13,7 @@ public class GameLogicManager : MonoBehaviour
     private bool HasDefault = false;
 
     private Coroutine Action;
-    private KeyInputs KeyInputs;
+    private List<KeyInputs> KeyInputs;
     private List<TouchInputs> TouchInputs;
 
     private float ActionDuration = 0f;
@@ -43,7 +43,7 @@ public class GameLogicManager : MonoBehaviour
             Action = StartCoroutine("PnC_Routine");
         }
     }
-    public void RequestQTE(float duration, double EndTime, double StartTime,KeyInputs keys, GameObject defaultScene, bool hasDefault)
+    public void RequestQTE(float duration, double EndTime, double StartTime,List<KeyInputs> keys, GameObject defaultScene, bool hasDefault)
     {
         ActionTime = 0f;
         ActionDuration = duration;
@@ -77,35 +77,38 @@ public class GameLogicManager : MonoBehaviour
         while (isInQTE)
         {
             ActionTime += Time.deltaTime;
-            int heldKeys = 0;
-            foreach (KeyCode key in KeyInputs.keys)
+            for (int i = 0; i < KeyInputs.Count; i++)
             {
-                if (Input.GetKey(key)) heldKeys++;
-            }
-            if (heldKeys >= KeyInputs.keys.Count)
-            {
-                //Do thing if keys are held then exits coroutine by breaking out of the while loop
-                if(KeyInputs.isLeading)
-                {
-                    Destroy(Video.instance);
-                    Video.instance = Instantiate(KeyInputs.prefab);
+                int heldKeys = 0;
+                foreach (KeyCode key in KeyInputs[i].keys)
+                { 
+                    if (Input.GetKey(key)) heldKeys++;  
                 }
-                break;
-            }
-            else if (ActionTime >= ActionDuration)
-            {
-                //Do thing if the QTE was a failure then exits coroutine by breaking out of the while loop
-                if (HasDefault)
+                if (heldKeys >= KeyInputs[i].keys.Count)
                 {
-                    Destroy(Video.instance);
-                    Video.instance = Instantiate(defaultVideo);
+                    //Do thing if keys are held then exits coroutine by breaking out of the while loop
+                    if (KeyInputs[i].isLeading)
+                    {
+                        Destroy(Video.instance);
+                        Video.instance = Instantiate(KeyInputs[i].prefab);
+                    }
+                    goto ext;
                 }
-                break;
+                else if (ActionTime >= ActionDuration)
+                {
+                    //Do thing if the QTE was a failure then exits coroutine by breaking out of the while loop
+                    if (HasDefault)
+                    {
+                        Destroy(Video.instance);
+                        Video.instance = Instantiate(defaultVideo);
+                    }
+                    goto ext;
+                }
             }
             yield return null;
-
         }
         //exits the coroutine
+        ext:;
         Video.ChangeSpeed(1);
         Video.currentActionIndex = 0;
         yield return null;
@@ -147,7 +150,6 @@ public class GameLogicManager : MonoBehaviour
                     Destroy(Video.instance);
                     Video.instance = Instantiate(defaultVideo);
                 }
-
                 break;
             }
             yield return null;

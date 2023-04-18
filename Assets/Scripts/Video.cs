@@ -63,7 +63,7 @@ public class Video : MonoBehaviour
         public double ActionStart;
         public double ActionEnd;
         public float ActionDuration;
-        public KeyInputs KeyInputs;
+        public List<KeyInputs> KeyInputs;
         public List<TouchInputs> TouchInputs;
     }
     
