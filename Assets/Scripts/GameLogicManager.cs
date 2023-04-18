@@ -134,6 +134,7 @@ public class GameLogicManager : MonoBehaviour
                                 Destroy(Video.instance);
                                 Video.instance = Instantiate(TouchInputs[i].prefab);
                             }
+
                             goto ext;
                         }
                     }

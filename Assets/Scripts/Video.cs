@@ -91,7 +91,6 @@ public struct KeyInputs
     public List<KeyCode> keys;
     public bool isLeading;
     public GameObject prefab;
-    
 }
 [System.Serializable]
 public struct TouchInputs
