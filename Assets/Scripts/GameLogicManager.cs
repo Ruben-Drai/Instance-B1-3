@@ -21,10 +21,8 @@ public class GameLogicManager : MonoBehaviour
     private double ActionEnd = 0f;
     private double ActionStart = 0f;
 
-    // Start is called before the first frame update
-
     public static GameObject instance;
-    void Start()
+    void Awake()
     {
         if (instance == null) instance = gameObject;
         else Destroy(gameObject);
