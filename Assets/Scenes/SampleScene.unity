@@ -345,7 +345,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6da3048c46645da49b0ab72ab089be3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  videoPlayer: {fileID: 2019929777}
+  defaultVideo: {fileID: 0}
 --- !u!1 &2019929773
 GameObject:
   m_ObjectHideFlags: 0
@@ -356,8 +356,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2019929775}
   - component: {fileID: 2019929776}
-  - component: {fileID: 2019929777}
-  - component: {fileID: 2019929778}
   m_Layer: 0
   m_Name: VideoPlayerManager
   m_TagString: Untagged
@@ -415,28 +413,3 @@ VideoPlayer:
   m_WaitForFirstFrame: 1
   m_FrameReadyEventEnabled: 0
   m_VideoShaders: []
---- !u!114 &2019929777
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2019929773}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2d04baf71ddf54478b34c1667dbb349, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2019929778
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2019929773}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 213a29e78519d814c8f58a08c60f4a40, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  actionList: []

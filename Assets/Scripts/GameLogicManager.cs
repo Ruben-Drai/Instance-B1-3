@@ -5,7 +5,6 @@ using UnityEngine;
 public class GameLogicManager : MonoBehaviour
 {
     [SerializeField]
-    private VideoPlayerManager videoPlayer;
     private GameObject defaultVideo;
 
     private bool isInQTE = false;
@@ -31,7 +30,7 @@ public class GameLogicManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Video.instance.GetComponent<Video>().CheckAction();
+        Video.instance?.GetComponent<Video>().CheckAction();
         if (isInQTE && Action == null)
         {
             Action = StartCoroutine("QTE_Routine");
@@ -66,7 +65,7 @@ public class GameLogicManager : MonoBehaviour
     private IEnumerator QTE_Routine()
     {
         //finds correct speed so that when the QTE ends, it ends at the target time in the video
-        videoPlayer.ChangeSpeed((float)(ActionDuration / (ActionEnd - videoPlayer.GetCurrentTime())));
+        Video.ChangeSpeed((float)(ActionDuration / (ActionEnd - Video.GetCurrentTime())));
         while (isInQTE)
         {
             ActionTime += Time.deltaTime;
@@ -94,14 +93,14 @@ public class GameLogicManager : MonoBehaviour
             }
         }
         //exits the coroutine
-        videoPlayer.ChangeSpeed(1);
+        Video.ChangeSpeed(1);
         Video.currentActionIndex = 0;
         yield return null;
     }
 
     private IEnumerator PnC_Routine()
     {
-        videoPlayer.ChangeSpeed(0);
+        Video.ChangeSpeed(0);
         while (isInPnC)
         {
             ActionTime += Time.deltaTime;
@@ -139,7 +138,7 @@ public class GameLogicManager : MonoBehaviour
         }
         //exits the coroutine
         ext:;
-        videoPlayer.ChangeSpeed(1);
+        Video.ChangeSpeed(1);
         Video.currentActionIndex = 0;
         yield return null;
     }

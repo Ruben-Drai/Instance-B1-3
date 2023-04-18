@@ -64,6 +64,15 @@ public class Video : MonoBehaviour
         QTE,
         PnC,
     }
+
+    public static void ChangeSpeed(float playackSpeed)
+    {
+        instance.GetComponent<VideoPlayer>().playbackSpeed = playackSpeed;
+    }
+    public static double GetCurrentTime()
+    {
+        return instance.GetComponent<VideoPlayer>().time;
+    }
 }
 [System.Serializable]
 public struct KeyInputs
