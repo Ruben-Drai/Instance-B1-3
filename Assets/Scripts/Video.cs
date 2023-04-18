@@ -4,21 +4,17 @@ using UnityEngine.Video;
 
 public class Video : MonoBehaviour
 {
-    // Start is called before the first frame update
     public List<Action> actionList;
 
     public static GameObject instance;
 
     private VideoPlayer player;
     public static int currentActionIndex = 0;
-    void Start()
-    {
-        player = GetComponent<VideoPlayer>();
-    }
     private void Awake()
     {
         if (instance == null) instance = gameObject;
         else Destroy(gameObject);
+        player = GetComponent<VideoPlayer>();
     }
 
     // Update is called once per frame
@@ -28,7 +24,7 @@ public class Video : MonoBehaviour
     }
     public void CheckAction()
     {
-        if (actionList?.Count > currentActionIndex && player.time == actionList[currentActionIndex].ActionStart)
+        if (player!=null && actionList?.Count > currentActionIndex && player.time == actionList[currentActionIndex].ActionStart)
         {
             if (actionList[currentActionIndex].type == ActionType.QTE)
             {
@@ -76,11 +72,18 @@ public class Video : MonoBehaviour
     
     public static void ChangeSpeed(float playackSpeed)
     {
-        instance.GetComponent<VideoPlayer>().playbackSpeed = playackSpeed;
+        VideoPlayer player = instance.GetComponent<VideoPlayer>();
+        if(player!=null)
+            player.playbackSpeed = playackSpeed;
+
     }
-    public static double GetCurrentTime()
+    public static double? GetCurrentTime()
     {
-        return instance.GetComponent<VideoPlayer>().time;
+        VideoPlayer player = instance.GetComponent<VideoPlayer>();
+        if (player != null)
+            return player.time;
+
+        return null;
     }
 }
 [System.Serializable]
