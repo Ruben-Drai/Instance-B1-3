@@ -4,14 +4,15 @@ using UnityEngine.Video;
 
 public class Video : MonoBehaviour
 {
-
-    public List<Action> actionList;    
     public static int currentActionIndex = 0;
     public static bool isInAction = false;
+    public static GameObject instance = null;
+
+    public List<Action> actionList;    
+
 
     private VideoPlayer player;
 
-    public static GameObject instance=null;
     private void Awake()
     {
        
@@ -69,7 +70,7 @@ public class Video : MonoBehaviour
                     actionList[currentActionIndex].TouchInputs,
                     actionList[currentActionIndex].defaultVideo,
                     actionList[currentActionIndex].HasDefault,
-                    actionList[currentActionIndex].setTimer,
+                    actionList[currentActionIndex].setGlobalTimer,
                     actionList[currentActionIndex].isUsingGlogalTime,
                     actionList[currentActionIndex].globalTimeSet
                     );
@@ -82,14 +83,17 @@ public class Video : MonoBehaviour
     public struct Action
     {
         public ActionType type;
-        public bool HasDefault; //trigger a video if the player fails the sequence 
-        public bool setTimer;
-        public bool isUsingGlogalTime;
-        public GameObject defaultVideo;
         public double ActionStart;
         public double ActionEnd;
         public float ActionDuration;
+
+        public bool HasDefault; //trigger a video if the player fails the sequence 
+        public GameObject defaultVideo;
+
+        public bool isUsingGlogalTime;
+        public bool setGlobalTimer; //if this action changes the global timer
         public float globalTimeSet;
+
         public List<KeyInputs> KeyInputs;
         public List<TouchInputs> TouchInputs;
 
@@ -122,9 +126,11 @@ public struct KeyInputs
 {
     //TODO: make it so that you can add "dependencies", meaning doing this action will affect the reputation system or collect an object
     //or on the contrary, that the prefab that gets loaded is different depending on current rep or collected items
-    public List<KeyCode> keys;
     public bool isLeading; // bool that trigger a video if the point and click is a sucess
     public GameObject prefab;
+    
+    public List<KeyCode> keys;
+
 }
 
 [System.Serializable]
@@ -132,7 +138,9 @@ public struct TouchInputs
 {
     //TODO: make it so that you can add "dependencies", meaning doing this action will affect the reputation system or collect an object
     //or on the contrary, that the prefab that gets loaded is different depending on current rep or collected items
-    public PolygonCollider2D button;
     public bool isLeading;
     public GameObject prefab;
+
+    public PolygonCollider2D button;
+
 }
