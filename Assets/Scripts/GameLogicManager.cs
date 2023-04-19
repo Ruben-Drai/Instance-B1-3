@@ -37,7 +37,7 @@ public class GameLogicManager : MonoBehaviour
     void Update()
     {
         Video.instance?.GetComponent<Video>()?.CheckAction();
-        if (Action == null && setTimer && globalTime == 0)
+        if (Action == null && setTimer && globalTime <= 0)
         {
             globalTime = potentialGlobalTime;
         }
@@ -77,7 +77,6 @@ public class GameLogicManager : MonoBehaviour
         setTimer = hasSetTimer;
         isUsingGlobalTime = isHeUsingTimer;
         potentialGlobalTime = timerSetup;
-
     }
 
     private IEnumerator QTE_Routine()
@@ -122,6 +121,7 @@ public class GameLogicManager : MonoBehaviour
         //exits the coroutine
         ext:;
         Action = null;
+        isInQTE = false;
         Video.ChangeSpeed(1);
         Video.currentActionIndex = 0;
         yield return null;
@@ -132,7 +132,7 @@ public class GameLogicManager : MonoBehaviour
         Video.ChangeSpeed(0);
         while (isInPnC)
         {
-            
+            //decreases only during the time the image is stopped, as such global timer doesn't decrease when the video is playing
             if (isUsingGlobalTime)
             {
                 globalTime -= Time.deltaTime;
@@ -178,8 +178,9 @@ public class GameLogicManager : MonoBehaviour
             yield return null;
             
         }
-        //exits the coroutine
+    //exits the coroutine
         ext:;
+        isInPnC = false;
         Action = null;
         Video.ChangeSpeed(1);
         Video.currentActionIndex = 0;
