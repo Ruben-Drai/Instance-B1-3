@@ -83,19 +83,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actionList:
   - type: 1
-    HasDefault: 1
-    setTimer: 1
-    isUsingGlogalTime: 1
-    defaultVideo: {fileID: 357266676485881424, guid: 033975ff9560d074a8c318f8e7ab3db8, type: 3}
     ActionStart: 5
     ActionEnd: 20
     ActionDuration: 1
+    HasDefault: 1
+    defaultVideo: {fileID: 357266676485881424, guid: 033975ff9560d074a8c318f8e7ab3db8, type: 3}
+    isUsingGlogalTime: 1
+    setGlobalTimer: 1
     globalTimeSet: 10
     KeyInputs: []
     TouchInputs:
-    - button: {fileID: 944859074253025016}
-      isLeading: 1
+    - isLeading: 1
       prefab: {fileID: 6016373529012551327, guid: 250284e56860cd24ea9bc027fac89659, type: 3}
+      button: {fileID: 944859074253025016}
 --- !u!1 &944859074253025017
 GameObject:
   m_ObjectHideFlags: 0
