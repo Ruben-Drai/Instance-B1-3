@@ -11,6 +11,8 @@ public class GameLogicManager : MonoBehaviour
     private bool isInQTE = false;
     private bool isInPnC = false;
     private bool HasDefault = false;
+    private bool setTimer = false;
+    private bool isUsingGlobalTime = false;
 
     private Coroutine Action;
     private List<KeyInputs> KeyInputs;
@@ -18,8 +20,11 @@ public class GameLogicManager : MonoBehaviour
 
     private float ActionDuration = 0f;
     private float ActionTime = 0f;
+    private float globalTime = 0f;
+    private float potentialGlobalTime = 0f;
     private double ActionEnd = 0f;
     private double ActionStart = 0f;
+
 
     public static GameObject instance;
     void Awake()
@@ -32,6 +37,10 @@ public class GameLogicManager : MonoBehaviour
     void Update()
     {
         Video.instance?.GetComponent<Video>()?.CheckAction();
+        if (Action == null && setTimer && globalTime <= 0)
+        {
+            globalTime = potentialGlobalTime;
+        }
         if (isInQTE && Action == null)
         {
             Action = StartCoroutine("QTE_Routine");
@@ -52,10 +61,10 @@ public class GameLogicManager : MonoBehaviour
         ActionStart = StartTime;
         defaultVideo = defaultScene;
         HasDefault = hasDefault;
-
+        Video.isInAction = true;
     }
 
-    public void RequestPnC(float duration, double StartTime, List<TouchInputs> Touch, GameObject defaultScene, bool hasDefault)
+    public void RequestPnC(float duration, double StartTime, List<TouchInputs> Touch, GameObject defaultScene, bool hasDefault, bool hasSetTimer, bool isHeUsingTimer, float timerSetup)
     {
         ActionTime = 0f;
         ActionDuration = duration;
@@ -65,6 +74,10 @@ public class GameLogicManager : MonoBehaviour
         ActionStart = StartTime;
         defaultVideo = defaultScene;
         HasDefault = hasDefault;
+        setTimer = hasSetTimer;
+        isUsingGlobalTime = isHeUsingTimer;
+        potentialGlobalTime = timerSetup;
+        Video.isInAction = true;
 
     }
 
@@ -88,7 +101,8 @@ public class GameLogicManager : MonoBehaviour
                     if (KeyInputs[i].isLeading)
                     {
                         Destroy(Video.instance);
-                        Video.instance = Instantiate(KeyInputs[i].prefab);
+                        Video.instance = null;
+                        Instantiate(KeyInputs[i].prefab);
                     }
                     goto ext;
                 }
@@ -98,7 +112,8 @@ public class GameLogicManager : MonoBehaviour
                     if (HasDefault)
                     {
                         Destroy(Video.instance);
-                        Video.instance = Instantiate(defaultVideo);
+                        Video.instance = null;
+                        Instantiate(defaultVideo);
                     }
                     goto ext;
                 }
@@ -107,8 +122,11 @@ public class GameLogicManager : MonoBehaviour
         }
         //exits the coroutine
         ext:;
+        Action = null;
+        isInQTE = false;
         Video.ChangeSpeed(1);
         Video.currentActionIndex = 0;
+        Video.isInAction = false;
         yield return null;
     }
 
@@ -117,7 +135,15 @@ public class GameLogicManager : MonoBehaviour
         Video.ChangeSpeed(0);
         while (isInPnC)
         {
-            ActionTime += Time.deltaTime;
+            //decreases only during the time the image is stopped, as such global timer doesn't decrease when the video is playing
+            if (isUsingGlobalTime)
+            {
+                globalTime -= Time.deltaTime;
+            }
+            else
+            {
+                ActionTime += Time.deltaTime;
+            }
             if (Input.GetMouseButtonDown(0))
             {
                 Vector2 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -131,32 +157,37 @@ public class GameLogicManager : MonoBehaviour
                             //do thing if hitbox is clicked
                             if (TouchInputs[i].isLeading)
                             {
-                                
                                 Destroy(Video.instance);
-                                Video.instance = Instantiate(TouchInputs[i].prefab);
+                                Video.instance = null;
+                                Instantiate(TouchInputs[i].prefab);
                             }
+
                             goto ext;
                         }
                     }
                 }
             }
-            else if (ActionTime >= ActionDuration)
+            else if ((isUsingGlobalTime && globalTime <= 0f) || (ActionTime >= ActionDuration && !isUsingGlobalTime)) //ajouter ici la condition de fin de timer 
             {
                 //Do thing if the PnC was a failure then exits coroutine by breaking out of the while loop
                 if (HasDefault)
                 {
                     Destroy(Video.instance);
-                    Video.instance = Instantiate(defaultVideo);
+                    Video.instance = null;                   
+                    Instantiate(defaultVideo);
                 }
                 break;
             }
             yield return null;
             
         }
-        //exits the coroutine
+    //exits the coroutine
         ext:;
+        isInPnC = false;
+        Action = null;
         Video.ChangeSpeed(1);
         Video.currentActionIndex = 0;
+        Video.isInAction = false;
         yield return null;
     }
 }
