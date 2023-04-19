@@ -61,7 +61,7 @@ public class GameLogicManager : MonoBehaviour
         ActionStart = StartTime;
         defaultVideo = defaultScene;
         HasDefault = hasDefault;
-
+        Video.isInAction = true;
     }
 
     public void RequestPnC(float duration, double StartTime, List<TouchInputs> Touch, GameObject defaultScene, bool hasDefault, bool hasSetTimer, bool isHeUsingTimer, float timerSetup)
@@ -77,6 +77,8 @@ public class GameLogicManager : MonoBehaviour
         setTimer = hasSetTimer;
         isUsingGlobalTime = isHeUsingTimer;
         potentialGlobalTime = timerSetup;
+        Video.isInAction = true;
+
     }
 
     private IEnumerator QTE_Routine()
@@ -124,6 +126,7 @@ public class GameLogicManager : MonoBehaviour
         isInQTE = false;
         Video.ChangeSpeed(1);
         Video.currentActionIndex = 0;
+        Video.isInAction = false;
         yield return null;
     }
 
@@ -184,6 +187,7 @@ public class GameLogicManager : MonoBehaviour
         Action = null;
         Video.ChangeSpeed(1);
         Video.currentActionIndex = 0;
+        Video.isInAction = false;
         yield return null;
     }
 }

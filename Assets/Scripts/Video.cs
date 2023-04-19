@@ -7,6 +7,7 @@ public class Video : MonoBehaviour
 
     public List<Action> actionList;    
     public static int currentActionIndex = 0;
+    public static bool isInAction = false;
 
     private VideoPlayer player;
 
@@ -28,6 +29,20 @@ public class Video : MonoBehaviour
     void Update()
     {
 
+    }
+    public void PlayVideo()
+    {
+        player.Play();
+    }
+
+    public void PauseVideo()
+    {
+        player.Pause();
+    }
+
+    public bool IsPlaying()
+    {
+        return player.isPlaying;
     }
     public void CheckAction()
     {
