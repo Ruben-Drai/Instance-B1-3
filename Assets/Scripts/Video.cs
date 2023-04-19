@@ -7,23 +7,42 @@ public class Video : MonoBehaviour
 
     public List<Action> actionList;    
     public static int currentActionIndex = 0;
+    public static bool isInAction = false;
 
     private VideoPlayer player;
 
-    public static GameObject instance;
+    public static GameObject instance=null;
     private void Awake()
     {
+       
         //Singleton stuff
         if (instance == null) instance = gameObject;
         else Destroy(gameObject);
         //Get Video
         player = GetComponent<VideoPlayer>();
     }
+    private void Start()
+    {
+        player.targetCamera = Camera.main;
+    }
 
-    // Update is called once per frame
     void Update()
     {
 
+    }
+    public void PlayVideo()
+    {
+        player.Play();
+    }
+
+    public void PauseVideo()
+    {
+        player.Pause();
+    }
+
+    public bool IsPlaying()
+    {
+        return player.isPlaying;
     }
     public void CheckAction()
     {
@@ -49,7 +68,10 @@ public class Video : MonoBehaviour
                     actionList[currentActionIndex].ActionStart, 
                     actionList[currentActionIndex].TouchInputs,
                     actionList[currentActionIndex].defaultVideo,
-                    actionList[currentActionIndex].HasDefault
+                    actionList[currentActionIndex].HasDefault,
+                    actionList[currentActionIndex].setTimer,
+                    actionList[currentActionIndex].isUsingGlogalTime,
+                    actionList[currentActionIndex].globalTimeSet
                     );
             }
             //increases index to read next action in list next time
@@ -60,13 +82,17 @@ public class Video : MonoBehaviour
     public struct Action
     {
         public ActionType type;
-        public bool HasDefault;
+        public bool HasDefault; //trigger a video if the player fails the sequence 
+        public bool setTimer;
+        public bool isUsingGlogalTime;
         public GameObject defaultVideo;
         public double ActionStart;
         public double ActionEnd;
         public float ActionDuration;
+        public float globalTimeSet;
         public List<KeyInputs> KeyInputs;
         public List<TouchInputs> TouchInputs;
+
     }
     public enum ActionType
     {
@@ -97,7 +123,7 @@ public struct KeyInputs
     //TODO: make it so that you can add "dependencies", meaning doing this action will affect the reputation system or collect an object
     //or on the contrary, that the prefab that gets loaded is different depending on current rep or collected items
     public List<KeyCode> keys;
-    public bool isLeading;
+    public bool isLeading; // bool that trigger a video if the point and click is a sucess
     public GameObject prefab;
 }
 
