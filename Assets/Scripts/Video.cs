@@ -115,7 +115,6 @@ public struct KeyInputs
     public List<KeyCode> keys;
     public bool isLeading; // bool that trigger a video if the point and click is a sucess
     public GameObject prefab;
-    public bool hasDependencies;
     public List<Dependencies> dependencies;
 }
 
@@ -127,6 +126,5 @@ public struct TouchInputs
     public PolygonCollider2D button;
     public bool isLeading;
     public GameObject prefab;
-    public bool hasDependencies;
     public List<Dependencies> dependencies;
 }

@@ -1,14 +1,10 @@
-using System;
-using System.Collections;
+using JetBrains.Annotations;
+using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class DepthInfluenceManager : MonoBehaviour
 {
-
     public List<string> Memory;
     public static GameObject instance;
     // Start is called before the first frame update
@@ -27,46 +23,46 @@ public class DepthInfluenceManager : MonoBehaviour
         if (dependencies.type == DependenceType.Get)
         {
             int validatedComps = 0;
-            foreach(string comp in dependencies.Operators)
+            foreach(Comparator comp in dependencies.Comparators)
             {
-                if(comp== "=")
+                if(comp.sign== "=")
                 {
-                    if (dependencies.value == instance.GetComponent<DepthInfluenceManager>().Memory[instance.GetComponent<DepthInfluenceManager>().Memory.IndexOf(dependencies.variable.ToString()) + 1])
+                    if (comp.value == instance.GetComponent<DepthInfluenceManager>().Memory[instance.GetComponent<DepthInfluenceManager>().Memory.IndexOf(dependencies.variable.ToString()) + 1])
                     {
                         validatedComps++;
                     }
                 }
-                else if (comp== "<")
+                else if (comp.sign == "<")
                 {
-                    if (int.Parse(dependencies.value) > int.Parse(instance.GetComponent<DepthInfluenceManager>().Memory[instance.GetComponent<DepthInfluenceManager>().Memory.IndexOf(dependencies.variable.ToString()) + 1]))
+                    if (int.Parse(comp.value) > int.Parse(instance.GetComponent<DepthInfluenceManager>().Memory[instance.GetComponent<DepthInfluenceManager>().Memory.IndexOf(dependencies.variable.ToString()) + 1]))
                     {
                         validatedComps++;
                     }
                 }
-                else if(comp== ">")
+                else if(comp.sign == ">")
                 {
-                    if (int.Parse(dependencies.value) < int.Parse(instance.GetComponent<DepthInfluenceManager>().Memory[instance.GetComponent<DepthInfluenceManager>().Memory.IndexOf(dependencies.variable.ToString()) + 1]))
+                    if (int.Parse(comp.value) < int.Parse(instance.GetComponent<DepthInfluenceManager>().Memory[instance.GetComponent<DepthInfluenceManager>().Memory.IndexOf(dependencies.variable.ToString()) + 1]))
                     {
                         validatedComps++;
                     }
                 }  
             }  
-            return dependencies.Operators.Count==0 ?false: validatedComps == dependencies.Operators.Count;
+            return validatedComps == dependencies.Comparators.Count;
         }
         else if (dependencies.type == DependenceType.Set)
         {
-            if (dependencies.Operators.Count == 0 || dependencies.Operators?[0] == "=")
+            if (dependencies.Comparators[0].sign == "" || dependencies.Comparators[0].sign == "=")
             {
-                instance.GetComponent<DepthInfluenceManager>().Memory[instance.GetComponent<DepthInfluenceManager>().Memory.IndexOf(dependencies.variable.ToString()) + 1] = dependencies.value;
+                instance.GetComponent<DepthInfluenceManager>().Memory[instance.GetComponent<DepthInfluenceManager>().Memory.IndexOf(dependencies.variable.ToString()) + 1] = dependencies.Comparators[0].value;
             }
-            else if (dependencies.Operators?[0] == "+")
+            else if (dependencies.Comparators[0].sign == "+")
             {
-                int result = int.Parse(dependencies.value) + int.Parse(instance.GetComponent<DepthInfluenceManager>().Memory[instance.GetComponent<DepthInfluenceManager>().Memory.IndexOf(dependencies.variable.ToString()) + 1]);
+                int result = int.Parse(dependencies.Comparators[0].value) + int.Parse(instance.GetComponent<DepthInfluenceManager>().Memory[instance.GetComponent<DepthInfluenceManager>().Memory.IndexOf(dependencies.variable.ToString()) + 1]);
                 instance.GetComponent<DepthInfluenceManager>().Memory[instance.GetComponent<DepthInfluenceManager>().Memory.IndexOf(dependencies.variable.ToString()) + 1] = result.ToString();
             }
-            else if (dependencies.Operators?[0] == "-")
+            else if (dependencies.Comparators[0].sign == "-")
             {
-                int result = int.Parse(dependencies.value) - int.Parse(instance.GetComponent<DepthInfluenceManager>().Memory[instance.GetComponent<DepthInfluenceManager>().Memory.IndexOf(dependencies.variable.ToString()) + 1]);
+                int result = int.Parse(dependencies.Comparators[0].value) - int.Parse(instance.GetComponent<DepthInfluenceManager>().Memory[instance.GetComponent<DepthInfluenceManager>().Memory.IndexOf(dependencies.variable.ToString()) + 1]);
                 instance.GetComponent<DepthInfluenceManager>().Memory[instance.GetComponent<DepthInfluenceManager>().Memory.IndexOf(dependencies.variable.ToString()) + 1] = result.ToString();
             }
             
@@ -85,8 +81,7 @@ public struct Dependencies
 {
     public DependenceType type;
     public InfluenceVariable variable;
-    public List<string> Operators;
-    public string value;
+    public List<Comparator> Comparators;
     public GameObject altPrefab;
 
 }
@@ -95,6 +90,13 @@ public enum InfluenceVariable
 {
     Papers,
 }
+[System.Serializable]
+public struct Comparator
+{
+    public string sign;
+    public string value;
+}
+
 [System.Serializable]
 public enum DependenceType
 {
