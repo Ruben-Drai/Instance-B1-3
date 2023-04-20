@@ -61,6 +61,13 @@ public class GameLogicManager : MonoBehaviour
     {
         //finds correct speed so that when the QTE ends, it ends at the target time in the video
         Video.ChangeSpeed((float)(1/(action.ActionDuration / (action.ActionEnd - action.ActionStart))));
+        foreach(KeyInputs key in action.KeyInputs)
+        {
+            foreach(GameObject button in key.buttonSprites) 
+            {
+                button.SetActive(true);
+            }
+        }
         while (isInQTE)
         {
             ActionTime += Time.deltaTime;
@@ -88,6 +95,7 @@ public class GameLogicManager : MonoBehaviour
                     if (action.KeyInputs[i].isLeading)
                     {
                         Destroy(Video.instance);
+                        Video.currentActionIndex = 0;
                         Video.instance = null;
                         Instantiate(isAlt == false ? action.KeyInputs[i].prefab: action.KeyInputs[i].dependencies[altIndex].altPrefab);
                     }
@@ -99,6 +107,7 @@ public class GameLogicManager : MonoBehaviour
                     if (action.HasDefault)
                     {
                         Destroy(Video.instance);
+                        Video.currentActionIndex = 0;
                         Video.instance = null;
                         Instantiate(action.defaultVideo);
                     }
@@ -109,10 +118,16 @@ public class GameLogicManager : MonoBehaviour
         }
         //exits the coroutine
         ext:;
+        foreach (KeyInputs key in action.KeyInputs)
+        {
+            foreach (GameObject button in key.buttonSprites)
+            {
+                button.SetActive(false);
+            }
+        }
         Action = null;
         isInQTE = false;
         Video.ChangeSpeed(1);
-        Video.currentActionIndex = 0;
         Video.isInAction = false;
         yield return null;
     }
@@ -121,6 +136,11 @@ public class GameLogicManager : MonoBehaviour
     {
         if(!Video.instance.GetComponent<VideoPlayer>().isLooping)
             Video.ChangeSpeed(0);
+
+        foreach(TouchInputs touchIn in action.TouchInputs)
+        {
+            touchIn.button.gameObject.SetActive(true);
+        }
 
         while (isInPnC)
         {
@@ -159,6 +179,7 @@ public class GameLogicManager : MonoBehaviour
                             if (action.TouchInputs[i].isLeading)
                             {
                                 Destroy(Video.instance);
+                                Video.currentActionIndex = 0;
                                 Video.instance = null;
                                 Instantiate(isAlt == false ? action.TouchInputs[i].prefab : action.TouchInputs[i].dependencies[altIndex].altPrefab);
                             }
@@ -174,6 +195,7 @@ public class GameLogicManager : MonoBehaviour
                 if (action.HasDefault)
                 {
                     Destroy(Video.instance);
+                    Video.currentActionIndex = 0;
                     Video.instance = null;                   
                     Instantiate(action.defaultVideo);
                 }
@@ -183,11 +205,14 @@ public class GameLogicManager : MonoBehaviour
             
         }
     //exits the coroutine
-        ext:;
+    ext:;
+        foreach (TouchInputs touchIn in action.TouchInputs)
+        {
+            touchIn.button.gameObject.SetActive(false);
+        }
         isInPnC = false;
         Action = null;
         Video.ChangeSpeed(1);
-        Video.currentActionIndex = 0;
         Video.isInAction = false;
         yield return null;
     }

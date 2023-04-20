@@ -112,9 +112,11 @@ public struct KeyInputs
     //TODO: make it so that you can add "dependencies", meaning doing this action will affect the reputation system or collect an object
     //or on the contrary, that the prefab that gets loaded is different depending on current rep or collected items
     public List<KeyCode> keys;
+    public List<GameObject> buttonSprites;
     public bool isLeading; // bool that trigger a video if the point and click is a sucess
     public GameObject prefab;
     public List<Dependencies> dependencies;
+
 }
 
 [System.Serializable]
