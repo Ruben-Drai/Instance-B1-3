@@ -15,7 +15,7 @@ public class DepthInfluenceManager : MonoBehaviour
         Memory = new List<string>()
         {
             "Papers","0",
-
+            "BruceReput","3"
         };
     }
     public static bool? checkDependencies(Dependencies dependencies)
@@ -89,6 +89,7 @@ public struct Dependencies
 public enum InfluenceVariable
 {
     Papers,
+    BruceReput
 }
 [System.Serializable]
 public struct Comparator
