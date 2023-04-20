@@ -147,7 +147,7 @@ MonoBehaviour:
   - type: 1
     HasDefault: 0
     setTimer: 0
-    isUsingGlogalTime: 1
+    isUsingGlobalTime: 1
     defaultVideo: {fileID: 0}
     ActionStart: 1
     ActionEnd: 0
@@ -158,3 +158,4 @@ MonoBehaviour:
     - button: {fileID: 583317004222853529}
       isLeading: 1
       prefab: {fileID: 944859073248157789, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
+      hasDependencies: 0

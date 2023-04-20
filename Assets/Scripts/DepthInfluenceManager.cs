@@ -9,36 +9,69 @@ using UnityEngine;
 public class DepthInfluenceManager : MonoBehaviour
 {
 
-    public Dictionary<string, string> Memory;
+    public List<string> Memory;
     public static GameObject instance;
     // Start is called before the first frame update
     void Awake()
     {
         if (instance == null) instance = gameObject;
         else Destroy(gameObject);
-        Memory = new Dictionary<string, string>()
+        Memory = new List<string>()
         {
-            {"Papers","1"}
+            "Papers","0",
+
         };
     }
-    public static bool? checkDependencies(dependencies dependencies)
+    public static bool? checkDependencies(Dependencies dependencies)
     {
-        if (dependencies.type == dependenceType.Get)
+        if (dependencies.type == DependenceType.Get)
         {
-            string varName = Enum.GetName(typeof(influenceVariable), dependencies.variable);
-            return instance.GetComponent<DepthInfluenceManager>().Memory.TryGetValue(varName, out var value) && value == dependencies.value;
-        }
-        else if (dependencies.type == dependenceType.Set)
-        {
-            string varName = Enum.GetName(typeof(influenceVariable), dependencies.variable);
-            int index = instance.GetComponent<DepthInfluenceManager>().Memory.Keys.ToList().IndexOf(varName);
-            if(dependencies.value.Contains("-") || dependencies.value.Contains("+"))
+            int validatedComps = 0;
+            foreach(string comp in dependencies.Operators)
             {
-                instance.GetComponent<DepthInfluenceManager>().Memory;
-            }
+                if(comp== "=")
+                {
+                    if (dependencies.value == instance.GetComponent<DepthInfluenceManager>().Memory[instance.GetComponent<DepthInfluenceManager>().Memory.IndexOf(dependencies.variable.ToString()) + 1])
+                    {
+                        validatedComps++;
+                    }
+                }
+                else if (comp== "<")
+                {
+                    if (int.Parse(dependencies.value) > int.Parse(instance.GetComponent<DepthInfluenceManager>().Memory[instance.GetComponent<DepthInfluenceManager>().Memory.IndexOf(dependencies.variable.ToString()) + 1]))
+                    {
+                        validatedComps++;
+                    }
+                }
+                else if(comp== ">")
+                {
+                    if (int.Parse(dependencies.value) < int.Parse(instance.GetComponent<DepthInfluenceManager>().Memory[instance.GetComponent<DepthInfluenceManager>().Memory.IndexOf(dependencies.variable.ToString()) + 1]))
+                    {
+                        validatedComps++;
+                    }
+                }  
+            }  
+            return dependencies.Operators.Count==0 ?false: validatedComps == dependencies.Operators.Count;
         }
-
-        return true;
+        else if (dependencies.type == DependenceType.Set)
+        {
+            if (dependencies.Operators.Count == 0 || dependencies.Operators?[0] == "=")
+            {
+                instance.GetComponent<DepthInfluenceManager>().Memory[instance.GetComponent<DepthInfluenceManager>().Memory.IndexOf(dependencies.variable.ToString()) + 1] = dependencies.value;
+            }
+            else if (dependencies.Operators?[0] == "+")
+            {
+                int result = int.Parse(dependencies.value) + int.Parse(instance.GetComponent<DepthInfluenceManager>().Memory[instance.GetComponent<DepthInfluenceManager>().Memory.IndexOf(dependencies.variable.ToString()) + 1]);
+                instance.GetComponent<DepthInfluenceManager>().Memory[instance.GetComponent<DepthInfluenceManager>().Memory.IndexOf(dependencies.variable.ToString()) + 1] = result.ToString();
+            }
+            else if (dependencies.Operators?[0] == "-")
+            {
+                int result = int.Parse(dependencies.value) - int.Parse(instance.GetComponent<DepthInfluenceManager>().Memory[instance.GetComponent<DepthInfluenceManager>().Memory.IndexOf(dependencies.variable.ToString()) + 1]);
+                instance.GetComponent<DepthInfluenceManager>().Memory[instance.GetComponent<DepthInfluenceManager>().Memory.IndexOf(dependencies.variable.ToString()) + 1] = result.ToString();
+            }
+            
+        }
+        return null;
     }
 
     // Update is called once per frame
@@ -47,20 +80,23 @@ public class DepthInfluenceManager : MonoBehaviour
 
     }
 }
-
-public struct dependencies
+[System.Serializable]
+public struct Dependencies
 {
-    public dependenceType type;
-    public influenceVariable variable;
+    public DependenceType type;
+    public InfluenceVariable variable;
+    public List<string> Operators;
     public string value;
-}
+    public GameObject altPrefab;
 
-public enum influenceVariable
+}
+[System.Serializable]
+public enum InfluenceVariable
 {
     Papers,
 }
-
-public enum dependenceType
+[System.Serializable]
+public enum DependenceType
 {
     Get,
     Set,
