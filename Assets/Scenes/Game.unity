@@ -180,6 +180,7 @@ GameObject:
   - component: {fileID: 481701597}
   - component: {fileID: 481701596}
   - component: {fileID: 481701600}
+  - component: {fileID: 481701601}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -287,6 +288,41 @@ MonoBehaviour:
   playSprite: {fileID: 21300000, guid: 93efbe9e9e12e194c8192a2226cb0a2d, type: 3}
   skipSprite: {fileID: 21300000, guid: 80623877fc46bc543aae005e980d7b55, type: 3}
   isPlaying: 1
+--- !u!328 &481701601
+VideoPlayer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 481701595}
+  m_Enabled: 1
+  m_VideoClip: {fileID: 32900000, guid: b2487192333214c4484526039362aebf, type: 3}
+  m_TargetCameraAlpha: 1
+  m_TargetCamera3DLayout: 0
+  m_TargetCamera: {fileID: 0}
+  m_TargetTexture: {fileID: 0}
+  m_TimeReference: 0
+  m_TargetMaterialRenderer: {fileID: 0}
+  m_TargetMaterialProperty: <noninit>
+  m_RenderMode: 2
+  m_AspectRatio: 2
+  m_DataSource: 0
+  m_PlaybackSpeed: 1
+  m_AudioOutputMode: 2
+  m_TargetAudioSources:
+  - {fileID: 0}
+  m_DirectAudioVolumes:
+  - 1
+  m_Url: 
+  m_EnabledAudioTracks: 01
+  m_DirectAudioMutes: 00
+  m_ControlledAudioTrackCount: 1
+  m_PlayOnAwake: 1
+  m_SkipOnDrop: 1
+  m_Looping: 0
+  m_WaitForFirstFrame: 1
+  m_FrameReadyEventEnabled: 0
+  m_VideoShaders: []
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -757,6 +793,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 9184151300806259576, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
+      propertyPath: m_Looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9184151300806259577, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
+      propertyPath: actionList.Array.data[0].isUsingGlobalTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9184151300806259577, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
+      propertyPath: actionList.Array.data[0].TouchInputs.Array.data[0].prefab
+      value: 
+      objectReference: {fileID: 4462835972127388265, guid: 681019fcd05f91a4b8ad5e922fc6cab0, type: 3}
+    - target: {fileID: 9184151300806259577, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
+      propertyPath: actionList.Array.data[0].TouchInputs.Array.data[0].dependencies.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9184151300806259578, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
       propertyPath: m_Name
       value: Y2Mate.is - Rick Astley - Never Gonna Give You Up (Official Music Video)-dQw4w9WgXcQ-1080p-1655097225533

@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Video;
 
 public class GameLogicManager : MonoBehaviour
 {
@@ -118,7 +119,9 @@ public class GameLogicManager : MonoBehaviour
 
     private IEnumerator PnC_Routine()
     {
-        Video.ChangeSpeed(0);
+        if(!Video.instance.GetComponent<VideoPlayer>().isLooping)
+            Video.ChangeSpeed(0);
+
         while (isInPnC)
         {
             //decreases only during the time the image is stopped, as such global timer doesn't decrease when the video is playing

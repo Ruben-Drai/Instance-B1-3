@@ -99,7 +99,6 @@ public struct Action
     public float globalTimeSet;
     public List<KeyInputs> KeyInputs;
     public List<TouchInputs> TouchInputs;
-
 }
 public enum ActionType
 {
