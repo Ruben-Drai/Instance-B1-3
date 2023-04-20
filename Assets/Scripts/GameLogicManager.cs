@@ -61,6 +61,13 @@ public class GameLogicManager : MonoBehaviour
     {
         //finds correct speed so that when the QTE ends, it ends at the target time in the video
         Video.ChangeSpeed((float)(1/(action.ActionDuration / (action.ActionEnd - action.ActionStart))));
+        foreach(KeyInputs key in action.KeyInputs)
+        {
+            foreach(GameObject button in key.buttonSprites) 
+            {
+                button.SetActive(true);
+            }
+        }
         while (isInQTE)
         {
             ActionTime += Time.deltaTime;
@@ -111,6 +118,13 @@ public class GameLogicManager : MonoBehaviour
         }
         //exits the coroutine
         ext:;
+        foreach (KeyInputs key in action.KeyInputs)
+        {
+            foreach (GameObject button in key.buttonSprites)
+            {
+                button.SetActive(false);
+            }
+        }
         Action = null;
         isInQTE = false;
         Video.ChangeSpeed(1);

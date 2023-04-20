@@ -786,80 +786,60 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &9184151301720921515
+--- !u!1001 &8459244727675028877
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 9184151300806259576, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
-      propertyPath: m_Looping
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9184151300806259577, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
-      propertyPath: actionList.Array.data[0].isUsingGlobalTime
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9184151300806259577, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
-      propertyPath: actionList.Array.data[0].TouchInputs.Array.data[0].prefab
-      value: 
-      objectReference: {fileID: 4462835972127388265, guid: 681019fcd05f91a4b8ad5e922fc6cab0, type: 3}
-    - target: {fileID: 9184151300806259577, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
-      propertyPath: actionList.Array.data[0].TouchInputs.Array.data[0].dependencies.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9184151300806259578, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
-      propertyPath: m_Name
-      value: Y2Mate.is - Rick Astley - Never Gonna Give You Up (Official Music Video)-dQw4w9WgXcQ-1080p-1655097225533
-      objectReference: {fileID: 0}
-    - target: {fileID: 9184151300806259583, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
+    - target: {fileID: 8459244728600322905, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 9184151300806259583, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
+    - target: {fileID: 8459244728600322905, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.278826
       objectReference: {fileID: 0}
-    - target: {fileID: 9184151300806259583, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
+    - target: {fileID: 8459244728600322905, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.5450734
       objectReference: {fileID: 0}
-    - target: {fileID: 9184151300806259583, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
+    - target: {fileID: 8459244728600322905, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9184151300806259583, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
+    - target: {fileID: 8459244728600322905, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 9184151300806259583, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
+    - target: {fileID: 8459244728600322905, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9184151300806259583, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
+    - target: {fileID: 8459244728600322905, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9184151300806259583, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
+    - target: {fileID: 8459244728600322905, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9184151300806259583, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
+    - target: {fileID: 8459244728600322905, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9184151300806259583, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
+    - target: {fileID: 8459244728600322905, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9184151300806259583, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
+    - target: {fileID: 8459244728600322905, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9184151300965089902, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
-      propertyPath: m_IsActive
-      value: 0
+    - target: {fileID: 8459244728600322908, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
+      propertyPath: m_Name
+      value: Y2Mate.is - Rick Astley - Never Gonna Give You Up (Official Music Video)-dQw4w9WgXcQ-1080p-1655097225533
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
