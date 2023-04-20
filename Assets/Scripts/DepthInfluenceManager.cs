@@ -27,21 +27,21 @@ public class DepthInfluenceManager : MonoBehaviour
             {
                 if(comp.sign== "=")
                 {
-                    if (comp.value == instance.GetComponent<DepthInfluenceManager>().Memory[instance.GetComponent<DepthInfluenceManager>().Memory.IndexOf(dependencies.variable.ToString()) + 1])
+                    if (comp.value == GetValue(dependencies.variable.ToString()))
                     {
                         validatedComps++;
                     }
                 }
                 else if (comp.sign == "<")
                 {
-                    if (int.Parse(comp.value) > int.Parse(instance.GetComponent<DepthInfluenceManager>().Memory[instance.GetComponent<DepthInfluenceManager>().Memory.IndexOf(dependencies.variable.ToString()) + 1]))
+                    if (int.Parse(comp.value) > int.Parse(GetValue(dependencies.variable.ToString())))
                     {
                         validatedComps++;
                     }
                 }
                 else if(comp.sign == ">")
                 {
-                    if (int.Parse(comp.value) < int.Parse(instance.GetComponent<DepthInfluenceManager>().Memory[instance.GetComponent<DepthInfluenceManager>().Memory.IndexOf(dependencies.variable.ToString()) + 1]))
+                    if (int.Parse(comp.value) < int.Parse(GetValue(dependencies.variable.ToString())))
                     {
                         validatedComps++;
                     }
@@ -69,7 +69,10 @@ public class DepthInfluenceManager : MonoBehaviour
         }
         return null;
     }
-
+    public static string GetValue(string varName)
+    {
+        return instance.GetComponent<DepthInfluenceManager>().Memory[instance.GetComponent<DepthInfluenceManager>().Memory.IndexOf(varName) + 1];
+    }
     // Update is called once per frame
     void Update()
     {
