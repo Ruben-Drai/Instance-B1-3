@@ -2,6 +2,7 @@ using JetBrains.Annotations;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DepthInfluenceManager : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class DepthInfluenceManager : MonoBehaviour
             "Papers","0",
             "BruceReput","3"
         };
+        if(SceneManager.GetActiveScene().name != "GameOver") DontDestroyOnLoad(gameObject);
     }
     public static bool? checkDependencies(Dependencies dependencies)
     {

@@ -47,7 +47,7 @@ public class Video : MonoBehaviour
     public void CheckAction()
     {
         //Checks when the action needs to be launched, Caution: Put actions in chronological order in the list
-        if (player!=null && actionList?.Count > currentActionIndex && player.time == actionList[currentActionIndex].ActionStart)
+        if (player!=null && actionList?.Count > currentActionIndex && player.time >= actionList[currentActionIndex].ActionStart)
         {
             //checks action type and requests appropriate action to be launched to the Game
             if (actionList[currentActionIndex].type == ActionType.QTE)
