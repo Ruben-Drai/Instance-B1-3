@@ -11,8 +11,8 @@ public class DepthInfluenceManager : MonoBehaviour
     {
         Memory = new List<string>()
         {
-            "Papers","0",
-            "PowerSupply","0",
+            "Wallet","0",
+            "Charger","0",
             "Pen","0",
             "Laptop","0",
             "Cap","0",

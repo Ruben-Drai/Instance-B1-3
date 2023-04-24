@@ -154,6 +154,7 @@ public class GameLogicManager : MonoBehaviour
 
     private IEnumerator PnC_Routine()
     {
+        Inventory.isInRoomPnC = action.ShowInventory;
         if (!Video.instance.GetComponent<VideoPlayer>().isLooping)
             Video.Pause(true);
 
@@ -242,5 +243,6 @@ public class GameLogicManager : MonoBehaviour
         action = new();
         Video.isInAction = false;
         yield return null;
+        Inventory.isInRoomPnC = false;
     }
 }
