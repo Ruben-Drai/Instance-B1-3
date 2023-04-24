@@ -514,6 +514,67 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 555431033}
   m_CullTransparentMesh: 1
+--- !u!1001 &1383407905
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7605135204391807665, guid: 1ec7c30457e11014690872b8eb57be57, type: 3}
+      propertyPath: m_Name
+      value: "QTE1 \u2010 R\xE9alis\xE9e avec Clipchamp"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7605135204391807668, guid: 1ec7c30457e11014690872b8eb57be57, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7605135204391807668, guid: 1ec7c30457e11014690872b8eb57be57, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.43187988
+      objectReference: {fileID: 0}
+    - target: {fileID: 7605135204391807668, guid: 1ec7c30457e11014690872b8eb57be57, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.41428918
+      objectReference: {fileID: 0}
+    - target: {fileID: 7605135204391807668, guid: 1ec7c30457e11014690872b8eb57be57, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7605135204391807668, guid: 1ec7c30457e11014690872b8eb57be57, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7605135204391807668, guid: 1ec7c30457e11014690872b8eb57be57, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7605135204391807668, guid: 1ec7c30457e11014690872b8eb57be57, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7605135204391807668, guid: 1ec7c30457e11014690872b8eb57be57, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7605135204391807668, guid: 1ec7c30457e11014690872b8eb57be57, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7605135204391807668, guid: 1ec7c30457e11014690872b8eb57be57, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7605135204391807668, guid: 1ec7c30457e11014690872b8eb57be57, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7605135204391807670, guid: 1ec7c30457e11014690872b8eb57be57, type: 3}
+      propertyPath: actionList.Array.data[0].HasDefault
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1ec7c30457e11014690872b8eb57be57, type: 3}
 --- !u!1 &1434708655
 GameObject:
   m_ObjectHideFlags: 0
@@ -1073,72 +1134,3 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1001 &2985075442560840477
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2985075443196169121, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
-      propertyPath: IsCheckPoint
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2985075443196169121, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
-      propertyPath: actionList.Array.data[0].type
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2985075443196169121, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
-      propertyPath: actionList.Array.data[0].isFail
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2985075443196169123, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2985075443196169123, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -5.13
-      objectReference: {fileID: 0}
-    - target: {fileID: 2985075443196169123, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.19
-      objectReference: {fileID: 0}
-    - target: {fileID: 2985075443196169123, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2985075443196169123, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2985075443196169123, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2985075443196169123, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2985075443196169123, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2985075443196169123, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2985075443196169123, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2985075443196169123, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2985075443196169126, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
-      propertyPath: m_Name
-      value: Y2Mate.is - Rick Astley - Never Gonna Give You Up (Official Music Video)-dQw4w9WgXcQ-1080p-1655097225533
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}

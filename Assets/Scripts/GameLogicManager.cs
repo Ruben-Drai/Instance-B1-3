@@ -138,6 +138,7 @@ public class GameLogicManager : MonoBehaviour
     ext:;
         Video.Pause(false);
     extFail:;
+        Video.ChangeSpeed(1);
         foreach (KeyInputs key in action.KeyInputs)
         {
             foreach (GameObject button in key.buttonSprites)
