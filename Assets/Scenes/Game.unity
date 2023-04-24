@@ -153,6 +153,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GlobalTime: 0
+  InitialGlobalTime: 0
+  failScreen: {fileID: 1004469039672012929, guid: bbfd346706fb7444fbae16b9b332fa92, type: 3}
 --- !u!4 &91195495
 Transform:
   m_ObjectHideFlags: 0
@@ -250,7 +252,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 5
   m_TargetDisplay: 0
@@ -268,8 +270,8 @@ RectTransform:
   m_Children:
   - {fileID: 555431034}
   - {fileID: 1595198476}
-  - {fileID: 148240275}
   - {fileID: 2044554154}
+  - {fileID: 148240275}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -512,107 +514,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 555431033}
   m_CullTransparentMesh: 1
---- !u!1001 &1268932468
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2880516266897513482, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
-      propertyPath: actionList.Array.data[0].setTimer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2880516266897513482, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
-      propertyPath: actionList.Array.data[0].globalTimeSet
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 2880516266897513482, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
-      propertyPath: actionList.Array.data[0].isUsingGlobalTime
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2880516266897513482, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
-      propertyPath: actionList.Array.data[0].TouchInputs.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2880516266897513482, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
-      propertyPath: actionList.Array.data[0].TouchInputs.Array.data[0].prefab
-      value: 
-      objectReference: {fileID: 1305161227369105165, guid: 250284e56860cd24ea9bc027fac89659, type: 3}
-    - target: {fileID: 2880516266897513482, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
-      propertyPath: actionList.Array.data[0].TouchInputs.Array.data[1].prefab
-      value: 
-      objectReference: {fileID: 1305161227369105165, guid: 250284e56860cd24ea9bc027fac89659, type: 3}
-    - target: {fileID: 2880516266897513482, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
-      propertyPath: actionList.Array.data[0].TouchInputs.Array.data[0].dependencies.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2880516266897513482, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
-      propertyPath: actionList.Array.data[0].TouchInputs.Array.data[1].dependencies.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2880516266897513482, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
-      propertyPath: actionList.Array.data[0].TouchInputs.Array.data[0].dependencies.Array.data[0].Comparators.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4206899213117780874, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4206899213117780874, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -5.13
-      objectReference: {fileID: 0}
-    - target: {fileID: 4206899213117780874, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.19
-      objectReference: {fileID: 0}
-    - target: {fileID: 4206899213117780874, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4206899213117780874, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4206899213117780874, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4206899213117780874, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4206899213117780874, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4206899213117780874, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4206899213117780874, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4206899213117780874, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5693868007622812515, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5693868009060126036, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7447150552247784222, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
-      propertyPath: m_Name
-      value: Y2Mate.is - Rick Astley - Never Gonna Give You Up (Official Music Video)-dQw4w9WgXcQ-1080p-1655097225533
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
 --- !u!1 &1434708655
 GameObject:
   m_ObjectHideFlags: 0
@@ -664,7 +565,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d341c12856b4d8e41a2a5d99983cc08f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxTime: 10
 --- !u!114 &1434708658
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -754,7 +654,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d341c12856b4d8e41a2a5d99983cc08f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxTime: 10
 --- !u!114 &1491967302
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1076,7 +975,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3059689435919426408, guid: d150cd99575d24a48894166903849d9a, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3059689435919426408, guid: d150cd99575d24a48894166903849d9a, type: 3}
       propertyPath: m_LocalScale.x
@@ -1167,10 +1066,79 @@ RectTransform:
   - {fileID: 1491967300}
   - {fileID: 1434708656}
   m_Father: {fileID: 481701599}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1001 &2985075442560840477
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2985075443196169121, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
+      propertyPath: IsCheckPoint
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2985075443196169121, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
+      propertyPath: actionList.Array.data[0].type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2985075443196169121, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
+      propertyPath: actionList.Array.data[0].isFail
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2985075443196169123, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2985075443196169123, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -5.13
+      objectReference: {fileID: 0}
+    - target: {fileID: 2985075443196169123, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.19
+      objectReference: {fileID: 0}
+    - target: {fileID: 2985075443196169123, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2985075443196169123, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2985075443196169123, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2985075443196169123, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2985075443196169123, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2985075443196169123, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2985075443196169123, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2985075443196169123, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2985075443196169126, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}
+      propertyPath: m_Name
+      value: Y2Mate.is - Rick Astley - Never Gonna Give You Up (Official Music Video)-dQw4w9WgXcQ-1080p-1655097225533
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 237afc5c521049c43abdd0a07f9d51aa, type: 3}

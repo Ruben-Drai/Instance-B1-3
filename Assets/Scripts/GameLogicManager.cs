@@ -13,8 +13,11 @@ public class GameLogicManager : MonoBehaviour
 
     private float ActionTime = 0f;
     public float GlobalTime = 0f;
+    public float InitialGlobalTime = 0f;
+    public GameObject failScreen;
 
     public static GameObject instance;
+    public static GameObject checkpoint;
     void Awake()
     {
         if (instance == null) instance = gameObject;
@@ -24,10 +27,11 @@ public class GameLogicManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Video.instance?.GetComponent<Video>()?.CheckAction();
+        Video.instance.GetComponent<Video>().CheckAction();
         if (Action == null && action.setTimer && GlobalTime <= 0)
         {
             GlobalTime = action.globalTimeSet;
+            InitialGlobalTime = action.globalTimeSet;
         }
         if (isInQTE && Action == null)
         {
@@ -35,7 +39,8 @@ public class GameLogicManager : MonoBehaviour
         }
         else if (isInPnC && Action == null)
         {
-            Action = StartCoroutine("PnC_Routine");
+            Action = StartCoroutine("PnC_Routine"); 
+
         }
     }
     public void RequestQTE(Action _Action)
@@ -48,27 +53,29 @@ public class GameLogicManager : MonoBehaviour
         isInQTE = true;
         isInPnC = false;
         Video.isInAction = true;
+        Action = null;
     }
 
     public void RequestPnC(Action _Action)
     {
         action = _Action;
         ActionTime = 0f;
-        if(!action.isUsingGlobalTime)
+        if (!action.isUsingGlobalTime)
             GlobalTime = 0f;
 
         isInQTE = false;
         isInPnC = true;
         Video.isInAction = true;
+        Action= null;
     }
 
     private IEnumerator QTE_Routine()
     {
         //finds correct speed so that when the QTE ends, it ends at the target time in the video
-        Video.ChangeSpeed((float)(1/(action.ActionDuration / (action.ActionEnd - action.ActionStart))));
-        foreach(KeyInputs key in action.KeyInputs)
+        Video.ChangeSpeed((float)(1 / (action.ActionDuration / (action.ActionEnd - action.ActionStart))));
+        foreach (KeyInputs key in action.KeyInputs)
         {
-            foreach(GameObject button in key.buttonSprites) 
+            foreach (GameObject button in key.buttonSprites)
             {
                 button.SetActive(true);
             }
@@ -80,19 +87,19 @@ public class GameLogicManager : MonoBehaviour
             {
                 int heldKeys = 0;
                 foreach (KeyCode key in action.KeyInputs[i].keys)
-                { 
-                    if (Input.GetKey(key)) heldKeys++;  
+                {
+                    if (Input.GetKey(key)) heldKeys++;
                 }
                 if (heldKeys >= action.KeyInputs[i].keys.Count)
                 {
                     bool? isAlt = false;
                     int altIndex = 0;
                     //Do thing if keys are held then exits coroutine by breaking out of the while loop
-                    for(int u =0;u< action.KeyInputs[i].dependencies.Count; u++)
+                    for (int u = 0; u < action.KeyInputs[i].dependencies.Count; u++)
                     {
-                        if (DepthInfluenceManager.checkDependencies(action.KeyInputs[i].dependencies[u]) != null)
+                        if (DepthInfluenceManager.CheckDependencies(action.KeyInputs[i].dependencies[u]) != null)
                         {
-                            isAlt = DepthInfluenceManager.checkDependencies(action.KeyInputs[i].dependencies[u]);
+                            isAlt = DepthInfluenceManager.CheckDependencies(action.KeyInputs[i].dependencies[u]);
                             altIndex = u;
                         }
 
@@ -102,7 +109,7 @@ public class GameLogicManager : MonoBehaviour
                         Destroy(Video.instance);
                         Video.currentActionIndex = 0;
                         Video.instance = null;
-                        Instantiate(isAlt == false ? action.KeyInputs[i].prefab: action.KeyInputs[i].dependencies[altIndex].altPrefab);
+                        Instantiate(isAlt == false ? action.KeyInputs[i].prefab : action.KeyInputs[i].dependencies[altIndex].altPrefab);
                     }
                     goto ext;
                 }
@@ -116,13 +123,21 @@ public class GameLogicManager : MonoBehaviour
                         Video.instance = null;
                         Instantiate(action.defaultVideo);
                     }
+                    else if (action.isFail)
+                    {
+                        Instantiate(failScreen,UI.instance.transform);
+                        Video.Pause(true);
+                        goto extFail;
+                    }
                     goto ext;
                 }
             }
             yield return null;
         }
-        //exits the coroutine
-        ext:;
+    //exits the coroutine
+    ext:;
+        Video.Pause(false);
+    extFail:;
         foreach (KeyInputs key in action.KeyInputs)
         {
             foreach (GameObject button in key.buttonSprites)
@@ -130,20 +145,18 @@ public class GameLogicManager : MonoBehaviour
                 button.SetActive(false);
             }
         }
-        Action = null;
         isInQTE = false;
         action = new();
-        Video.ChangeSpeed(1);
         Video.isInAction = false;
         yield return null;
     }
 
     private IEnumerator PnC_Routine()
     {
-        if(!Video.instance.GetComponent<VideoPlayer>().isLooping)
-            Video.ChangeSpeed(0);
+        if (!Video.instance.GetComponent<VideoPlayer>().isLooping)
+            Video.Pause(true);
 
-        foreach(TouchInputs touchIn in action.TouchInputs)
+        foreach (TouchInputs touchIn in action.TouchInputs)
         {
             touchIn.button.gameObject.SetActive(true);
         }
@@ -174,9 +187,9 @@ public class GameLogicManager : MonoBehaviour
                             //Do thing if keys are held then exits coroutine by breaking out of the while loop
                             for (int u = 0; u < action.TouchInputs[i].dependencies.Count; u++)
                             {
-                                if (DepthInfluenceManager.checkDependencies(action.TouchInputs[i].dependencies[u]) != null)
+                                if (DepthInfluenceManager.CheckDependencies(action.TouchInputs[i].dependencies[u]) != null)
                                 {
-                                    isAlt = DepthInfluenceManager.checkDependencies(action.TouchInputs[i].dependencies[u]);
+                                    isAlt = DepthInfluenceManager.CheckDependencies(action.TouchInputs[i].dependencies[u]);
                                     altIndex = u;
                                 }
 
@@ -202,24 +215,30 @@ public class GameLogicManager : MonoBehaviour
                 {
                     Destroy(Video.instance);
                     Video.currentActionIndex = 0;
-                    Video.instance = null;                   
+                    Video.instance = null;
                     Instantiate(action.defaultVideo);
                 }
-                break;
+                else if (action.isFail)
+                {
+                    Instantiate(failScreen,UI.instance.transform);
+                    Video.Pause(true);
+                    goto extFail;
+                }
+                goto ext;
             }
             yield return null;
-            
+
         }
     //exits the coroutine
     ext:;
+        Video.Pause(false);
+    extFail:;
         foreach (TouchInputs touchIn in action.TouchInputs)
         {
             touchIn.button.gameObject.SetActive(false);
         }
         isInPnC = false;
-        Action = null;
         action = new();
-        Video.ChangeSpeed(1);
         Video.isInAction = false;
         yield return null;
     }

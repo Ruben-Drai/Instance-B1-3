@@ -1,44 +1,34 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Video;
 
 public class Video : MonoBehaviour
 {
-
-    public List<Action> actionList;    
+    public bool IsCheckPoint;
+    public GameObject self;
+    public List<Action> actionList;
     public static int currentActionIndex = 0;
     public static bool isInAction = false;
 
     private VideoPlayer player;
 
-    public static GameObject instance=null;
+    public static GameObject instance = null;
     private void Awake()
     {
-       
         //Singleton stuff
         if (instance == null) instance = gameObject;
         else Destroy(gameObject);
         //Get Video
         player = GetComponent<VideoPlayer>();
+
     }
     private void Start()
     {
+        if (IsCheckPoint) GameLogicManager.checkpoint = self;
         player.targetCamera = Camera.main;
     }
 
-    void Update()
-    {
-
-    }
-    public void PlayVideo()
-    {
-        player.Play();
-    }
-
-    public void PauseVideo()
-    {
-        player.Pause();
-    }
 
     public bool IsPlaying()
     {
@@ -47,7 +37,7 @@ public class Video : MonoBehaviour
     public void CheckAction()
     {
         //Checks when the action needs to be launched, Caution: Put actions in chronological order in the list
-        if (player!=null && actionList?.Count > currentActionIndex && player.time >= actionList[currentActionIndex].ActionStart)
+        if (player != null && actionList?.Count > currentActionIndex && player.time >= actionList[currentActionIndex].ActionStart)
         {
             //checks action type and requests appropriate action to be launched to the Game
             if (actionList[currentActionIndex].type == ActionType.QTE)
@@ -66,14 +56,21 @@ public class Video : MonoBehaviour
             currentActionIndex++;
         }
     }
-    
-    
-    
     public static void ChangeSpeed(float playbackSpeed)
     {
         VideoPlayer player = instance.GetComponent<VideoPlayer>();
-        if(player!=null)
+        if (player != null)
             player.playbackSpeed = playbackSpeed;
+
+    }
+    public static void Pause(bool Pause)
+    {
+        VideoPlayer player = instance.GetComponent<VideoPlayer>();
+        if (player != null)
+            if (Pause)
+                player.Pause();
+            else
+                player.Play();
 
     }
     public static double? GetCurrentTime()
@@ -89,6 +86,7 @@ public class Video : MonoBehaviour
 public struct Action
 {
     public ActionType type;
+    public bool isFail;
     public bool HasDefault; //trigger a video if the player fails the sequence 
     public bool setTimer;
     public bool isUsingGlobalTime;

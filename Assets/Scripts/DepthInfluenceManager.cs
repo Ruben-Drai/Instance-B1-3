@@ -1,5 +1,3 @@
-using JetBrains.Annotations;
-using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -28,17 +26,17 @@ public class DepthInfluenceManager : MonoBehaviour
     {
         if (instance == null) instance = gameObject;
         else Destroy(gameObject);
-        
-        if(SceneManager.GetActiveScene().name != "GameOver") DontDestroyOnLoad(gameObject);
+
+        if (SceneManager.GetActiveScene().name != "GameOver") DontDestroyOnLoad(gameObject);
     }
-    public static bool? checkDependencies(Dependencies dependencies)
+    public static bool? CheckDependencies(Dependencies dependencies)
     {
         if (dependencies.type == DependenceType.Get)
         {
             int validatedComps = 0;
-            foreach(Comparator comp in dependencies.Comparators)
+            foreach (Comparator comp in dependencies.Comparators)
             {
-                if(comp.sign== "=")
+                if (comp.sign == "=")
                 {
                     if (comp.value == GetValue(dependencies.variable.ToString()))
                     {
@@ -52,14 +50,14 @@ public class DepthInfluenceManager : MonoBehaviour
                         validatedComps++;
                     }
                 }
-                else if(comp.sign == ">")
+                else if (comp.sign == ">")
                 {
                     if (int.Parse(comp.value) < int.Parse(GetValue(dependencies.variable.ToString())))
                     {
                         validatedComps++;
                     }
-                }  
-            }  
+                }
+            }
             return validatedComps == dependencies.Comparators.Count;
         }
         else if (dependencies.type == DependenceType.Set)
@@ -84,11 +82,6 @@ public class DepthInfluenceManager : MonoBehaviour
     public static string GetValue(string varName)
     {
         return instance.GetComponent<DepthInfluenceManager>().Memory[instance.GetComponent<DepthInfluenceManager>().Memory.IndexOf(varName) + 1];
-    }
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 }
 [System.Serializable]

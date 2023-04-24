@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class buttonAnim : MonoBehaviour
@@ -23,10 +21,10 @@ public class buttonAnim : MonoBehaviour
         if (Time.realtimeSinceStartup > timeAnchor + rythme)
         {
             timeAnchor = Time.realtimeSinceStartup;
-            changePos();
+            ChangePos();
         }
     }
-    private void changePos()
+    private void ChangePos()
     {
         if (isAtOrigin)
         {

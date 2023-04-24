@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Sprites;
 using UnityEngine.UI;
 using UnityEngine.Video;
 
@@ -12,25 +9,28 @@ public class UI : MonoBehaviour
     public Sprite playSprite;
     public Sprite skipSprite;
     public bool isPlaying = true;
+    public static GameObject instance;
 
-    public void Start()
+    private void Start()
     {
+        if (instance == null) instance = gameObject;
+        else Destroy(gameObject);
     }
 
     public void PauseButton()
     {
         //TODO: pause timers in QTE and PnC
         //Changes the button's sprite to the play sprite and pauses the video
-        if (Video.instance.GetComponent<Video>().IsPlaying())
+        if (Video.instance.GetComponent<Video>().IsPlaying() && !Video.isInAction)
         {
             Pausebutton.image.sprite = playSprite;
-            Video.instance.GetComponent<Video>().PauseVideo();
+            Video.Pause(true);
         }
         //Changes the button's sprite to the pause sprite and resumes the video
-        else
+        else if(!Video.isInAction)
         {
             Pausebutton.image.sprite = pauseSprite;
-            Video.instance.GetComponent<Video>().PlayVideo();
+            Video.Pause(false);
         }
     }
 
@@ -38,7 +38,7 @@ public class UI : MonoBehaviour
     {
         if (Video.instance.GetComponent<Video>().IsPlaying() && !Video.isInAction)
         {
-            Video.instance.GetComponent<VideoPlayer>().time = Video.instance.GetComponent<Video>().actionList[Video.currentActionIndex].ActionStart-1;
+            Video.instance.GetComponent<VideoPlayer>().time = Video.instance.GetComponent<Video>().actionList[Video.currentActionIndex].ActionStart - 1;
         }
     }
 }

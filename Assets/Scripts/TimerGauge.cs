@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TimerScript : MonoBehaviour
+public class TimerGauge : MonoBehaviour
 {
     private Image timerBar;
-    private float maxTime = 20f;
+    private float maxTime;
     private float timeLeft;
 
     private void Start()
@@ -17,6 +15,7 @@ public class TimerScript : MonoBehaviour
     private void Update()
     {
         timeLeft = GameLogicManager.instance.GetComponent<GameLogicManager>().GlobalTime;
+        maxTime= GameLogicManager.instance.GetComponent<GameLogicManager>().InitialGlobalTime;
         if (timeLeft > 0)
         {
             GetComponent<Image>().enabled = true;
