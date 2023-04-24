@@ -2,21 +2,34 @@ using JetBrains.Annotations;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DepthInfluenceManager : MonoBehaviour
 {
     public List<string> Memory;
     public static GameObject instance;
     // Start is called before the first frame update
+    private void Start()
+    {
+        Memory = new List<string>()
+        {
+            "Papers","0",
+            "PowerSupply","0",
+            "Pen","0",
+            "Laptop","0",
+            "Cap","0",
+            "Wanted","0",
+            "BruceReput","3",
+            "Lives","3",
+            "Advancement","0",
+        };
+    }
     void Awake()
     {
         if (instance == null) instance = gameObject;
         else Destroy(gameObject);
-        Memory = new List<string>()
-        {
-            "Papers","0",
-            "BruceReput","3"
-        };
+        
+        if(SceneManager.GetActiveScene().name != "GameOver") DontDestroyOnLoad(gameObject);
     }
     public static bool? checkDependencies(Dependencies dependencies)
     {
@@ -65,7 +78,6 @@ public class DepthInfluenceManager : MonoBehaviour
                 int result = int.Parse(dependencies.Comparators[0].value) - int.Parse(instance.GetComponent<DepthInfluenceManager>().Memory[instance.GetComponent<DepthInfluenceManager>().Memory.IndexOf(dependencies.variable.ToString()) + 1]);
                 instance.GetComponent<DepthInfluenceManager>().Memory[instance.GetComponent<DepthInfluenceManager>().Memory.IndexOf(dependencies.variable.ToString()) + 1] = result.ToString();
             }
-            
         }
         return null;
     }
@@ -86,13 +98,18 @@ public struct Dependencies
     public InfluenceVariable variable;
     public List<Comparator> Comparators;
     public GameObject altPrefab;
-
 }
 [System.Serializable]
 public enum InfluenceVariable
 {
     Papers,
-    BruceReput
+    PowerSupply,
+    Pen,
+    Cap,
+    Wanted,
+    BruceReput,
+    Lives,
+    Advancement,
 }
 [System.Serializable]
 public struct Comparator
