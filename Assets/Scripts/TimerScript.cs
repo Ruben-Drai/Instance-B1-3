@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class TimerScript : MonoBehaviour
 {
-    Image timerBar;
-    public float maxTime = 20f;
-    float timeLeft;
+    private Image timerBar;
+    private float maxTime = 20f;
+    private float timeLeft;
 
     private void Start()
     {

@@ -41,7 +41,9 @@ public class GameLogicManager : MonoBehaviour
     public void RequestQTE(Action _Action)
     {
         action = _Action;
-        GlobalTime = 0f;
+        if (!action.isUsingGlobalTime)
+            GlobalTime = 0f;
+
         ActionTime = 0f;
         isInQTE = true;
         isInPnC = false;
@@ -52,7 +54,9 @@ public class GameLogicManager : MonoBehaviour
     {
         action = _Action;
         ActionTime = 0f;
-        GlobalTime = 0f;
+        if(!action.isUsingGlobalTime)
+            GlobalTime = 0f;
+
         isInQTE = false;
         isInPnC = true;
         Video.isInAction = true;
@@ -217,6 +221,6 @@ public class GameLogicManager : MonoBehaviour
         action = new();
         Video.ChangeSpeed(1);
         Video.isInAction = false;
-        /*yield return null;*/
+        yield return null;
     }
 }
