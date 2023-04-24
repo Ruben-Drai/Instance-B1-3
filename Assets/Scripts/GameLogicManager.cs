@@ -128,6 +128,7 @@ public class GameLogicManager : MonoBehaviour
         }
         Action = null;
         isInQTE = false;
+        action = new();
         Video.ChangeSpeed(1);
         Video.isInAction = false;
         yield return null;
@@ -213,8 +214,9 @@ public class GameLogicManager : MonoBehaviour
         }
         isInPnC = false;
         Action = null;
+        action = new();
         Video.ChangeSpeed(1);
         Video.isInAction = false;
-        yield return null;
+        /*yield return null;*/
     }
 }

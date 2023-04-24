@@ -85,14 +85,18 @@ MonoBehaviour:
   - type: 1
     HasDefault: 0
     setTimer: 0
-    isUsingGlobalTime: 0
+    isUsingGlobalTime: 1
     defaultVideo: {fileID: 0}
     ActionStart: 1
-    ActionEnd: 5
+    ActionEnd: 6
     ActionDuration: 4
     globalTimeSet: 0
     KeyInputs: []
-    TouchInputs: []
+    TouchInputs:
+    - button: {fileID: 4550394680807583642}
+      isLeading: 0
+      prefab: {fileID: 0}
+      dependencies: []
 --- !u!1 &7538408500401148879
 GameObject:
   m_ObjectHideFlags: 0
