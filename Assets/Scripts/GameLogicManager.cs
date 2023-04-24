@@ -12,7 +12,7 @@ public class GameLogicManager : MonoBehaviour
     private Coroutine Action;
 
     private float ActionTime = 0f;
-    private float GlobalTime = 0f;
+    public float GlobalTime = 0f;
 
     public static GameObject instance;
     void Awake()
@@ -40,7 +40,8 @@ public class GameLogicManager : MonoBehaviour
     }
     public void RequestQTE(Action _Action)
     {
-        action = _Action; 
+        action = _Action;
+        GlobalTime = 0f;
         ActionTime = 0f;
         isInQTE = true;
         isInPnC = false;
@@ -51,10 +52,10 @@ public class GameLogicManager : MonoBehaviour
     {
         action = _Action;
         ActionTime = 0f;
+        GlobalTime = 0f;
         isInQTE = false;
         isInPnC = true;
         Video.isInAction = true;
-
     }
 
     private IEnumerator QTE_Routine()
