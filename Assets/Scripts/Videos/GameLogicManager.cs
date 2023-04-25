@@ -72,7 +72,9 @@ public class GameLogicManager : MonoBehaviour
     private IEnumerator QTE_Routine()
     {
         //finds correct speed so that when the QTE ends, it ends at the target time in the video
-        Video.ChangeSpeed((float)(1 / (action.ActionDuration / (action.ActionEnd - action.ActionStart))));
+        if (action.Pause) Video.Pause(true);
+        else Video.ChangeSpeed((float)(1 / (action.ActionDuration / (action.ActionEnd - action.ActionStart))));
+
         foreach (KeyInputs key in action.KeyInputs)
         {
             foreach (GameObject button in key.buttonSprites)
@@ -164,6 +166,9 @@ public class GameLogicManager : MonoBehaviour
 
     private IEnumerator PnC_Routine()
     {
+        if (action.Pause) Video.Pause(true);
+        else Video.ChangeSpeed((float)(1 / (action.ActionDuration / (action.ActionEnd - action.ActionStart))));
+
         Inventory.isInRoomPnC = action.ShowInventory;
         if (!Video.instance.GetComponent<VideoPlayer>().isLooping)
             Video.Pause(true);

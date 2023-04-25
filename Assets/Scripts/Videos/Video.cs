@@ -87,6 +87,7 @@ public class Video : MonoBehaviour
 public struct Action
 {
     public ActionType type;
+    public bool Pause;
     public bool ShowInventory;
     public bool isFail;
     public bool HasDefault; //trigger a video if the player fails the sequence 
