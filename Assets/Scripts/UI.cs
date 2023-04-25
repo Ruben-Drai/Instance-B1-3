@@ -10,6 +10,7 @@ public class UI : MonoBehaviour
     public Sprite skipSprite;
     public bool isPlaying = true;
     public static GameObject instance;
+    private double lastSkippedTo;
 
     private void Start()
     {
@@ -36,9 +37,10 @@ public class UI : MonoBehaviour
 
     public void SkipButton()
     {
-        if (Video.instance.GetComponent<Video>().IsPlaying() && !Video.isInAction)
+        if (Video.instance.GetComponent<Video>().IsPlaying() && !Video.isInAction && lastSkippedTo != Video.instance.GetComponent<Video>().actionList[Video.currentActionIndex].ActionStart - 1)
         {
-            Video.instance.GetComponent<VideoPlayer>().time = Video.instance.GetComponent<Video>().actionList[Video.currentActionIndex].ActionStart - 1;
+            lastSkippedTo = Video.instance.GetComponent<Video>().actionList[Video.currentActionIndex].ActionStart - 1;
+            Video.instance.GetComponent<VideoPlayer>().time = lastSkippedTo;
         }
     }
 }

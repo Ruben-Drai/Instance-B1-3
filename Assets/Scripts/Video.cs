@@ -6,7 +6,6 @@ using UnityEngine.Video;
 public class Video : MonoBehaviour
 {
     public bool IsCheckPoint;
-    public GameObject self;
     public List<Action> actionList;
     public static int currentActionIndex = 0;
     public static bool isInAction = false;
@@ -22,13 +21,14 @@ public class Video : MonoBehaviour
         //Get Video
         player = GetComponent<VideoPlayer>();
 
+
     }
     private void Start()
     {
-        if (IsCheckPoint) GameLogicManager.checkpoint = self;
+        Debug.Log(gameObject.name);
         player.targetCamera = Camera.main;
+        if (IsCheckPoint) GameLogicManager.checkpoint = name;
     }
-
 
     public bool IsPlaying()
     {

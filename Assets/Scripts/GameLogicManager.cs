@@ -17,7 +17,7 @@ public class GameLogicManager : MonoBehaviour
     public GameObject failScreen;
 
     public static GameObject instance;
-    public static GameObject checkpoint;
+    public static string checkpoint;
     void Awake()
     {
         if (instance == null) instance = gameObject;
@@ -82,16 +82,22 @@ public class GameLogicManager : MonoBehaviour
         }
         while (isInQTE)
         {
+            int i = 0;
             ActionTime += Time.deltaTime;
-            for (int i = 0; i < action.KeyInputs.Count; i++)
+            do
             {
                 int heldKeys = 0;
-                foreach (KeyCode key in action.KeyInputs[i].keys)
+                if (action.KeyInputs.Count != 0)
                 {
-                    if (Input.GetKey(key)) heldKeys++;
+                    foreach (KeyCode key in action.KeyInputs[i].keys)
+                    {
+                        if (Input.GetKey(key)) heldKeys++;
+                    }
                 }
-                if (heldKeys >= action.KeyInputs[i].keys.Count)
+               
+                if ( action.KeyInputs.Count != 0 && i < action.KeyInputs[i].keys.Count && heldKeys >= action.KeyInputs[i].keys.Count && action.KeyInputs[i].keys.Count != 0)
                 {
+                    
                     bool? isAlt = false;
                     int altIndex = 0;
                     //Do thing if keys are held then exits coroutine by breaking out of the while loop
@@ -109,7 +115,9 @@ public class GameLogicManager : MonoBehaviour
                         Destroy(Video.instance);
                         Video.currentActionIndex = 0;
                         Video.instance = null;
-                        Instantiate(isAlt == false ? action.KeyInputs[i].prefab : action.KeyInputs[i].dependencies[altIndex].altPrefab);
+                        GameObject temp = Instantiate(isAlt == false ? action.KeyInputs[i].prefab : action.KeyInputs[i].dependencies[altIndex].altPrefab);
+                        temp.name = isAlt == false ? action.KeyInputs[i].prefab.name : action.KeyInputs[i].dependencies[altIndex].altPrefab.name;
+
                     }
                     goto ext;
                 }
@@ -121,17 +129,19 @@ public class GameLogicManager : MonoBehaviour
                         Destroy(Video.instance);
                         Video.currentActionIndex = 0;
                         Video.instance = null;
-                        Instantiate(action.defaultVideo);
+                        GameObject temp = Instantiate(action.defaultVideo);
+                        temp.name= action.defaultVideo.name;
                     }
                     else if (action.isFail)
                     {
-                        Instantiate(failScreen,UI.instance.transform);
+                        Instantiate(failScreen, UI.instance.transform);
                         Video.Pause(true);
                         goto extFail;
                     }
                     goto ext;
                 }
-            }
+                i++;
+            } while (i < action.KeyInputs.Count);
             yield return null;
         }
     //exits the coroutine
@@ -202,7 +212,8 @@ public class GameLogicManager : MonoBehaviour
                                 Destroy(Video.instance);
                                 Video.currentActionIndex = 0;
                                 Video.instance = null;
-                                Instantiate(isAlt == false ? action.TouchInputs[i].prefab : action.TouchInputs[i].dependencies[altIndex].altPrefab);
+                                GameObject temp = Instantiate(isAlt == false ? action.TouchInputs[i].prefab : action.TouchInputs[i].dependencies[altIndex].altPrefab);
+                                temp.name = isAlt == false ? action.TouchInputs[i].prefab.name : action.TouchInputs[i].dependencies[altIndex].altPrefab.name;
                             }
 
                             goto ext;
