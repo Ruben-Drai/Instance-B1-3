@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &300080386865635923
+--- !u!1 &5125075884823310051
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,23 +8,23 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 300080386865635926}
-  - component: {fileID: 300080386865635925}
-  - component: {fileID: 300080386865635924}
+  - component: {fileID: 6615480841280204926}
+  - component: {fileID: 7072282520742004394}
+  - component: {fileID: 4912402130181580814}
   m_Layer: 0
-  m_Name: LongGoodEnding
+  m_Name: DontParkHere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &300080386865635926
+--- !u!4 &6615480841280204926
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 300080386865635923}
+  m_GameObject: {fileID: 5125075884823310051}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -33,15 +33,15 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!328 &300080386865635925
+--- !u!328 &7072282520742004394
 VideoPlayer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 300080386865635923}
+  m_GameObject: {fileID: 5125075884823310051}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: d2db4ee6f3812bb42ac1a2662663da89, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: 2a05fc91b9a4d924685e0e64608723ba, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 0}
@@ -68,13 +68,13 @@ VideoPlayer:
   m_WaitForFirstFrame: 1
   m_FrameReadyEventEnabled: 0
   m_VideoShaders: []
---- !u!114 &300080386865635924
+--- !u!114 &4912402130181580814
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 300080386865635923}
+  m_GameObject: {fileID: 5125075884823310051}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3183cc0e35d4f1348b12701cbe6f4894, type: 3}
@@ -90,9 +90,9 @@ MonoBehaviour:
     HasDefault: 1
     setTimer: 0
     isUsingGlobalTime: 0
-    defaultVideo: {fileID: 0}
-    ActionStart: 17.9
-    ActionEnd: 17.9
+    defaultVideo: {fileID: 7602653717137693695, guid: da1fd5a6184037a4bafd7999451e4387, type: 3}
+    ActionStart: 3.1
+    ActionEnd: 3.1
     ActionDuration: 0
     globalTimeSet: 0
     KeyInputs: []

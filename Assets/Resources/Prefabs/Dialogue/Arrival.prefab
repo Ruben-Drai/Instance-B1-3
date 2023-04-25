@@ -80,6 +80,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3183cc0e35d4f1348b12701cbe6f4894, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowClock: 1
   IsCheckPoint: 0
   actionList:
   - type: 0

@@ -5,6 +5,7 @@ using UnityEngine.Video;
 
 public class Video : MonoBehaviour
 {
+    public bool ShowClock;
     public bool IsCheckPoint;
     public List<Action> actionList;
     public static int currentActionIndex = 0;
@@ -28,6 +29,8 @@ public class Video : MonoBehaviour
         Debug.Log(gameObject.name);
         player.targetCamera = Camera.main;
         if (IsCheckPoint) GameLogicManager.checkpoint = name;
+        if (ShowClock) Clock.instance.SetActive(true);
+        else Clock.instance.SetActive(false);
     }
 
     public bool IsPlaying()
@@ -55,6 +58,9 @@ public class Video : MonoBehaviour
             //increases index to read next action in list next time
             if(currentActionIndex<actionList.Count)
                 currentActionIndex++;
+
+            if (currentActionIndex >= actionList.Count && player.isLooping)
+                currentActionIndex = 0;
         }
     }
     public static void ChangeSpeed(float playbackSpeed)

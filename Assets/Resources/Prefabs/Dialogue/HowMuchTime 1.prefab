@@ -80,6 +80,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3183cc0e35d4f1348b12701cbe6f4894, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowClock: 1
   IsCheckPoint: 0
   actionList:
   - type: 0
@@ -89,7 +90,7 @@ MonoBehaviour:
     HasDefault: 1
     setTimer: 0
     isUsingGlobalTime: 0
-    defaultVideo: {fileID: 623415668028800054, guid: e00a8dec1fe3547418a39b9bb7faf441, type: 3}
+    defaultVideo: {fileID: 160735163856395472, guid: e00a8dec1fe3547418a39b9bb7faf441, type: 3}
     ActionStart: 4.1
     ActionEnd: 4.1
     ActionDuration: 0

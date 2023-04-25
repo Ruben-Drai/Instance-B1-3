@@ -81,29 +81,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3183cc0e35d4f1348b12701cbe6f4894, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowClock: 1
   IsCheckPoint: 0
   actionList:
   - type: 1
     Pause: 0
     ShowInventory: 0
     isFail: 0
-    HasDefault: 1
+    HasDefault: 0
     setTimer: 0
     isUsingGlobalTime: 0
     defaultVideo: {fileID: 0}
     ActionStart: 0
-    ActionEnd: 1
-    ActionDuration: 1
+    ActionEnd: 3.9
+    ActionDuration: 3.9
     globalTimeSet: 0
     KeyInputs: []
     TouchInputs:
     - button: {fileID: 8784547357170108106}
-      isLeading: 0
+      isLeading: 1
       prefab: {fileID: 6146810747849789131, guid: a315df748ee50b84487c3a36e5129d8b, type: 3}
       dependencies: []
     - button: {fileID: 8784547357166850443}
-      isLeading: 0
-      prefab: {fileID: 0}
+      isLeading: 1
+      prefab: {fileID: 5125075884823310051, guid: ca3b312db82d9694da414ccca5791742, type: 3}
       dependencies: []
 --- !u!1 &8784547355924500613
 GameObject:
