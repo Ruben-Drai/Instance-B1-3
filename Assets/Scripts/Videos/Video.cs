@@ -20,7 +20,7 @@ public class Video : MonoBehaviour
         else Destroy(gameObject);
         //Get Video
         player = GetComponent<VideoPlayer>();
-
+        transform.position = Vector3.zero;
 
     }
     private void Start()
@@ -53,7 +53,8 @@ public class Video : MonoBehaviour
                     );
             }
             //increases index to read next action in list next time
-            currentActionIndex++;
+            if(currentActionIndex<actionList.Count)
+                currentActionIndex++;
         }
     }
     public static void ChangeSpeed(float playbackSpeed)
