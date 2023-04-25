@@ -95,10 +95,11 @@ public struct Dependencies
 [System.Serializable]
 public enum InfluenceVariable
 {
-    Papers,
-    PowerSupply,
+    Wallet,
+    Charger,
     Pen,
     Cap,
+    Laptop,
     Wanted,
     BruceReput,
     Lives,

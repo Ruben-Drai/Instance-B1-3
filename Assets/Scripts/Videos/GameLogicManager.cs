@@ -16,6 +16,7 @@ public class GameLogicManager : MonoBehaviour
     public float InitialGlobalTime = 0f;
     public GameObject failScreen;
 
+    private bool CoroutineFinished = true;
     public static GameObject instance;
     public static string checkpoint;
     void Awake()
@@ -45,34 +46,44 @@ public class GameLogicManager : MonoBehaviour
     }
     public void RequestQTE(Action _Action)
     {
-        action = _Action;
-        if (!action.isUsingGlobalTime)
-            GlobalTime = 0f;
+        if(CoroutineFinished)
+        {
+            CoroutineFinished = false;
+            action = _Action;
+            if (!action.isUsingGlobalTime)
+                GlobalTime = 0f;
 
-        ActionTime = 0f;
-        isInQTE = true;
-        isInPnC = false;
-        Video.isInAction = true;
-        Action = null;
+            ActionTime = 0f;
+            isInQTE = true;
+            isInPnC = false;
+            Video.isInAction = true;
+            Action = null;
+        }
     }
 
     public void RequestPnC(Action _Action)
     {
-        action = _Action;
-        ActionTime = 0f;
-        if (!action.isUsingGlobalTime)
-            GlobalTime = 0f;
+        if (CoroutineFinished)
+        {
+            CoroutineFinished = false;
+            action = _Action;
+            ActionTime = 0f;
+            if (!action.isUsingGlobalTime)
+                GlobalTime = 0f;
 
-        isInQTE = false;
-        isInPnC = true;
-        Video.isInAction = true;
-        Action= null;
+            isInQTE = false;
+            isInPnC = true;
+            Video.isInAction = true;
+            Action = null;
+        } 
     }
 
     private IEnumerator QTE_Routine()
     {
         //finds correct speed so that when the QTE ends, it ends at the target time in the video
-        Video.ChangeSpeed((float)(1 / (action.ActionDuration / (action.ActionEnd - action.ActionStart))));
+        if (action.Pause) Video.Pause(true);
+        else Video.ChangeSpeed((float)(1 / (action.ActionDuration / (action.ActionEnd - action.ActionStart))));
+
         foreach (KeyInputs key in action.KeyInputs)
         {
             foreach (GameObject button in key.buttonSprites)
@@ -112,11 +123,26 @@ public class GameLogicManager : MonoBehaviour
                     }
                     if (action.KeyInputs[i].isLeading)
                     {
-                        Destroy(Video.instance);
-                        Video.currentActionIndex = 0;
-                        Video.instance = null;
-                        GameObject temp = Instantiate(isAlt == false ? action.KeyInputs[i].prefab : action.KeyInputs[i].dependencies[altIndex].altPrefab);
-                        temp.name = isAlt == false ? action.KeyInputs[i].prefab.name : action.KeyInputs[i].dependencies[altIndex].altPrefab.name;
+                        if (action.KeyInputs[i].isLeading)
+                        {
+                            if ((bool)isAlt && action.KeyInputs[i].dependencies[altIndex].altPrefab != null)
+                            {
+                                Destroy(Video.instance);
+                                Video.currentActionIndex = 0;
+                                Video.instance = null;
+                                GameObject temp = Instantiate(action.KeyInputs[i].dependencies[altIndex].altPrefab);
+                                temp.name = action.KeyInputs[i].dependencies[altIndex].altPrefab.name;
+
+                            }
+                            else if (!(bool)isAlt && action.KeyInputs[i].prefab != null)
+                            {
+                                Destroy(Video.instance);
+                                Video.currentActionIndex = 0;
+                                Video.instance = null;
+                                GameObject temp = Instantiate(action.KeyInputs[i].prefab);
+                                temp.name = action.KeyInputs[i].prefab.name;
+                            }
+                        }
 
                     }
                     goto ext;
@@ -159,11 +185,15 @@ public class GameLogicManager : MonoBehaviour
         isInQTE = false;
         action = new();
         Video.isInAction = false;
+        CoroutineFinished = true;
         yield return null;
     }
 
     private IEnumerator PnC_Routine()
     {
+        if (action.Pause) Video.Pause(true);
+        else Video.ChangeSpeed((float)(1 / (action.ActionDuration / (action.ActionEnd - action.ActionStart))));
+
         Inventory.isInRoomPnC = action.ShowInventory;
         if (!Video.instance.GetComponent<VideoPlayer>().isLooping)
             Video.Pause(true);
@@ -209,13 +239,23 @@ public class GameLogicManager : MonoBehaviour
                             //do thing if hitbox is clicked
                             if (action.TouchInputs[i].isLeading)
                             {
-                                Destroy(Video.instance);
-                                Video.currentActionIndex = 0;
-                                Video.instance = null;
-                                GameObject temp = Instantiate(isAlt == false ? action.TouchInputs[i].prefab : action.TouchInputs[i].dependencies[altIndex].altPrefab);
-                                temp.name = isAlt == false ? action.TouchInputs[i].prefab.name : action.TouchInputs[i].dependencies[altIndex].altPrefab.name;
-                            }
-
+                                if ((bool)isAlt && action.TouchInputs[i].dependencies[altIndex].altPrefab!=null)
+                                {
+                                    Destroy(Video.instance);
+                                    Video.currentActionIndex = 0;
+                                    Video.instance = null;
+                                    GameObject temp = Instantiate(action.TouchInputs[i].dependencies[altIndex].altPrefab);
+                                    temp.name = action.TouchInputs[i].dependencies[altIndex].altPrefab.name;
+                                }
+                                else if (!(bool)isAlt && action.TouchInputs[i].prefab != null)
+                                {
+                                    Destroy(Video.instance);
+                                    Video.currentActionIndex = 0;
+                                    Video.instance = null;
+                                    GameObject temp = Instantiate(action.TouchInputs[i].prefab);
+                                    temp.name = action.TouchInputs[i].prefab.name;
+                                }
+                            }    
                             goto ext;
                         }
                     }
@@ -253,6 +293,7 @@ public class GameLogicManager : MonoBehaviour
         isInPnC = false;
         action = new();
         Video.isInAction = false;
+        CoroutineFinished = true;
         yield return null;
         Inventory.isInRoomPnC = false;
     }
