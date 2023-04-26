@@ -194,7 +194,7 @@ public class GameLogicManager : MonoBehaviour
         if (action.Pause) Video.Pause(true);
         else Video.ChangeSpeed((float)(1 / (action.ActionDuration / (action.ActionEnd - action.ActionStart))));
 
-        Inventory.isInRoomPnC = action.ShowInventory;
+        
         if (!Video.instance.GetComponent<VideoPlayer>().isLooping)
             Video.Pause(true);
 
@@ -205,6 +205,7 @@ public class GameLogicManager : MonoBehaviour
 
         while (isInPnC)
         {
+            Inventory.isInRoomPnC = action.ShowInventory;
             //decreases only during the time the image is stopped, as such global timer doesn't decrease when the video is playing
             if (action.isUsingGlobalTime)
             {
@@ -232,7 +233,11 @@ public class GameLogicManager : MonoBehaviour
                                 if (DepthInfluenceManager.CheckDependencies(action.TouchInputs[i].dependencies[u]) != null)
                                 {
                                     isAlt = DepthInfluenceManager.CheckDependencies(action.TouchInputs[i].dependencies[u]);
-                                    altIndex = u;
+                                    if ((bool)isAlt)
+                                    {
+                                        altIndex = u;
+                                        break;
+                                    }
                                 }
 
                             }
@@ -269,7 +274,8 @@ public class GameLogicManager : MonoBehaviour
                     Destroy(Video.instance);
                     Video.currentActionIndex = 0;
                     Video.instance = null;
-                    Instantiate(action.defaultVideo);
+                    GameObject temp = Instantiate(action.defaultVideo);
+                    temp.name = action.defaultVideo.name;
                 }
                 else if (action.isFail)
                 {
@@ -294,7 +300,7 @@ public class GameLogicManager : MonoBehaviour
         action = new();
         Video.isInAction = false;
         CoroutineFinished = true;
-        yield return null;
         Inventory.isInRoomPnC = false;
+        yield return null;
     }
 }

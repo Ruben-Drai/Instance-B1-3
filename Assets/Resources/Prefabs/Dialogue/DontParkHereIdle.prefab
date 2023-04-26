@@ -356,6 +356,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3183cc0e35d4f1348b12701cbe6f4894, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsEnding: 0
   ShowClock: 1
   IsCheckPoint: 0
   actionList:
@@ -378,20 +379,20 @@ MonoBehaviour:
       prefab: {fileID: 1294312452623091235, guid: c3f6bcc3db60a6949bff1e1bd2945ab9, type: 3}
       dependencies:
       - type: 1
-        variable: 8
+        variable: 7
         Comparators:
-        - sign: +
-          value: 5
+        - sign: '-'
+          value: 1
         altPrefab: {fileID: 0}
     - button: {fileID: 4090981269264164131}
       isLeading: 1
       prefab: {fileID: 2418162067339218994, guid: b3aac3a022024d3468b2b4721dbbfba8, type: 3}
       dependencies:
       - type: 1
-        variable: 8
+        variable: 7
         Comparators:
-        - sign: +
-          value: 5
+        - sign: '-'
+          value: 1
         altPrefab: {fileID: 0}
     - button: {fileID: 4665970502682737741}
       isLeading: 1

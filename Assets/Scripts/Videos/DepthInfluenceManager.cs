@@ -6,28 +6,23 @@ public class DepthInfluenceManager : MonoBehaviour
 {
     public List<string> Memory;
     public static GameObject instance;
+    public float TimeElapsed=0f;
     // Start is called before the first frame update
     private void Start()
     {
-        Memory = new List<string>()
-        {
-            "Wallet","0",
-            "Charger","0",
-            "Pen","0",
-            "Laptop","0",
-            "Cap","0",
-            "Wanted","0",
-            "BruceReput","3",
-            "Lives","3",
-            "Advancement","0",
-        };
+        
+
+
     }
     void Awake()
     {
         if (instance == null) instance = gameObject;
         else Destroy(gameObject);
-
-        if (SceneManager.GetActiveScene().name != "GameOver") DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(gameObject);
+    }
+    private void Update()
+    {
+        TimeElapsed += Time.deltaTime;
     }
     public static bool? CheckDependencies(Dependencies dependencies)
     {
@@ -68,12 +63,12 @@ public class DepthInfluenceManager : MonoBehaviour
             }
             else if (dependencies.Comparators[0].sign == "+")
             {
-                int result = int.Parse(dependencies.Comparators[0].value) + int.Parse(instance.GetComponent<DepthInfluenceManager>().Memory[instance.GetComponent<DepthInfluenceManager>().Memory.IndexOf(dependencies.variable.ToString()) + 1]);
+                int result = int.Parse(instance.GetComponent<DepthInfluenceManager>().Memory[instance.GetComponent<DepthInfluenceManager>().Memory.IndexOf(dependencies.variable.ToString()) + 1])+ int.Parse(dependencies.Comparators[0].value);
                 instance.GetComponent<DepthInfluenceManager>().Memory[instance.GetComponent<DepthInfluenceManager>().Memory.IndexOf(dependencies.variable.ToString()) + 1] = result.ToString();
             }
             else if (dependencies.Comparators[0].sign == "-")
             {
-                int result = int.Parse(dependencies.Comparators[0].value) - int.Parse(instance.GetComponent<DepthInfluenceManager>().Memory[instance.GetComponent<DepthInfluenceManager>().Memory.IndexOf(dependencies.variable.ToString()) + 1]);
+                int result = int.Parse(instance.GetComponent<DepthInfluenceManager>().Memory[instance.GetComponent<DepthInfluenceManager>().Memory.IndexOf(dependencies.variable.ToString()) + 1])- int.Parse(dependencies.Comparators[0].value);
                 instance.GetComponent<DepthInfluenceManager>().Memory[instance.GetComponent<DepthInfluenceManager>().Memory.IndexOf(dependencies.variable.ToString()) + 1] = result.ToString();
             }
         }
@@ -103,7 +98,6 @@ public enum InfluenceVariable
     Wanted,
     BruceReput,
     Lives,
-    Advancement,
 }
 [System.Serializable]
 public struct Comparator

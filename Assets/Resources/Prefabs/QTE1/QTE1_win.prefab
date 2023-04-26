@@ -82,9 +82,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3183cc0e35d4f1348b12701cbe6f4894, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsEnding: 0
+  ShowClock: 0
   IsCheckPoint: 1
   actionList:
   - type: 0
+    Pause: 0
     ShowInventory: 0
     isFail: 0
     HasDefault: 1
@@ -104,6 +107,7 @@ MonoBehaviour:
       dependencies: []
     TouchInputs: []
   - type: 0
+    Pause: 0
     ShowInventory: 0
     isFail: 0
     HasDefault: 1
@@ -123,6 +127,7 @@ MonoBehaviour:
       dependencies: []
     TouchInputs: []
   - type: 0
+    Pause: 0
     ShowInventory: 0
     isFail: 0
     HasDefault: 1
@@ -140,6 +145,20 @@ MonoBehaviour:
       isLeading: 0
       prefab: {fileID: 0}
       dependencies: []
+    TouchInputs: []
+  - type: 0
+    Pause: 0
+    ShowInventory: 0
+    isFail: 0
+    HasDefault: 1
+    setTimer: 0
+    isUsingGlobalTime: 0
+    defaultVideo: {fileID: 8310395208936761606, guid: a2fb8791604851b4f8997c7436336eac, type: 3}
+    ActionStart: 30.9
+    ActionEnd: 30.9
+    ActionDuration: 0
+    globalTimeSet: 0
+    KeyInputs: []
     TouchInputs: []
 --- !u!1001 &5108064799243789317
 PrefabInstance:

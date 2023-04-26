@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Video;
 
 public class Video : MonoBehaviour
 {
+    public bool IsEnding;
     public bool ShowClock;
     public bool IsCheckPoint;
     public List<Action> actionList;
@@ -26,7 +28,6 @@ public class Video : MonoBehaviour
     }
     private void Start()
     {
-        Debug.Log(gameObject.name);
         player.targetCamera = Camera.main;
         if (IsCheckPoint) GameLogicManager.checkpoint = name;
         if (ShowClock) Clock.instance.SetActive(true);
@@ -39,6 +40,8 @@ public class Video : MonoBehaviour
     }
     public void CheckAction()
     {
+        if(IsEnding && player.time >= player.length-1) SceneManager.LoadScene("GameOver");
+
         //Checks when the action needs to be launched, Caution: Put actions in chronological order in the list
         if (player != null && actionList?.Count > currentActionIndex && player.time >= actionList[currentActionIndex].ActionStart)
         {
@@ -56,7 +59,9 @@ public class Video : MonoBehaviour
                     );
             }
             //increases index to read next action in list next time
-            if(currentActionIndex<actionList.Count)
+
+
+            if (currentActionIndex<actionList.Count)
                 currentActionIndex++;
 
             if (currentActionIndex >= actionList.Count && player.isLooping)
