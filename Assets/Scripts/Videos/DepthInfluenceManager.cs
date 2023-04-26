@@ -34,6 +34,7 @@ public class DepthInfluenceManager : MonoBehaviour
     private void Update()
     {
         TimeElapsed += Time.deltaTime;
+        Debug.Log("Temps écoulé : " + TimeElapsed.ToString("F2"));
     }
     public static bool? CheckDependencies(Dependencies dependencies)
     {
