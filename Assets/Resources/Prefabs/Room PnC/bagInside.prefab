@@ -1,10 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
-<<<<<<< HEAD
 --- !u!1 &8855251942558057097
-=======
---- !u!1 &8091671937981232249
->>>>>>> 1873441ed41d7b7f7598f636c983820d0526bec2
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -12,7 +8,6 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-<<<<<<< HEAD
   - component: {fileID: 8855251942558057098}
   - component: {fileID: 8855251942558057096}
   - component: {fileID: 8855251942558057099}
@@ -190,10 +185,6 @@ GameObject:
   - component: {fileID: 8855251944038192410}
   - component: {fileID: 8855251944038192412}
   - component: {fileID: 8855251944038192413}
-=======
-  - component: {fileID: 1998352906528870737}
-  - component: {fileID: 5963856399594279953}
->>>>>>> 1873441ed41d7b7f7598f636c983820d0526bec2
   m_Layer: 0
   m_Name: bagInside
   m_TagString: Untagged
@@ -201,26 +192,17 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
-<<<<<<< HEAD
 --- !u!4 &8855251944038192410
-=======
---- !u!4 &1998352906528870737
->>>>>>> 1873441ed41d7b7f7598f636c983820d0526bec2
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< HEAD
   m_GameObject: {fileID: 8855251943739894280}
-=======
-  m_GameObject: {fileID: 8091671937981232249}
->>>>>>> 1873441ed41d7b7f7598f636c983820d0526bec2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-<<<<<<< HEAD
   m_Children:
   - {fileID: 8855251942558057098}
   - {fileID: 8855251944091181654}
@@ -228,23 +210,12 @@ Transform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!328 &8855251944038192412
-=======
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!328 &5963856399594279953
->>>>>>> 1873441ed41d7b7f7598f636c983820d0526bec2
 VideoPlayer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< HEAD
   m_GameObject: {fileID: 8855251943739894280}
-=======
-  m_GameObject: {fileID: 8091671937981232249}
->>>>>>> 1873441ed41d7b7f7598f636c983820d0526bec2
   m_Enabled: 1
   m_VideoClip: {fileID: 32900000, guid: 918da71f0b049ba4a837756ee1aeea4c, type: 3}
   m_TargetCameraAlpha: 1
@@ -267,7 +238,6 @@ VideoPlayer:
   m_ControlledAudioTrackCount: 0
   m_PlayOnAwake: 1
   m_SkipOnDrop: 1
-<<<<<<< HEAD
   m_Looping: 1
   m_WaitForFirstFrame: 1
   m_FrameReadyEventEnabled: 0
@@ -293,7 +263,7 @@ MonoBehaviour:
     ShowInventory: 1
     isFail: 0
     HasDefault: 1
-    setTimer: 1
+    setTimer: 0
     isUsingGlobalTime: 1
     defaultVideo: {fileID: 7605135204391807665, guid: 1ec7c30457e11014690872b8eb57be57, type: 3}
     ActionStart: 0.1
@@ -431,9 +401,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
-=======
-  m_Looping: 0
-  m_WaitForFirstFrame: 1
-  m_FrameReadyEventEnabled: 0
-  m_VideoShaders: []
->>>>>>> 1873441ed41d7b7f7598f636c983820d0526bec2
