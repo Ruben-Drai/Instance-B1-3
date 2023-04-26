@@ -6,9 +6,18 @@ public class DepthInfluenceManager : MonoBehaviour
 {
     public List<string> Memory;
     public static GameObject instance;
+    public float TimeElapsed;
     // Start is called before the first frame update
     private void Start()
     {
+        
+    }
+    void Awake()
+    {
+        if (instance == null) instance = gameObject;
+        else Destroy(gameObject);
+
+        if (SceneManager.GetActiveScene().name != "GameOver") DontDestroyOnLoad(gameObject);
         Memory = new List<string>()
         {
             "Wallet","0",
@@ -22,12 +31,9 @@ public class DepthInfluenceManager : MonoBehaviour
             "Advancement","0",
         };
     }
-    void Awake()
+    private void Update()
     {
-        if (instance == null) instance = gameObject;
-        else Destroy(gameObject);
-
-        if (SceneManager.GetActiveScene().name != "GameOver") DontDestroyOnLoad(gameObject);
+        TimeElapsed += Time.deltaTime;
     }
     public static bool? CheckDependencies(Dependencies dependencies)
     {
