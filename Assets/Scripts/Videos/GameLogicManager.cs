@@ -270,7 +270,8 @@ public class GameLogicManager : MonoBehaviour
                     Destroy(Video.instance);
                     Video.currentActionIndex = 0;
                     Video.instance = null;
-                    Instantiate(action.defaultVideo);
+                    GameObject temp = Instantiate(action.defaultVideo);
+                    temp.name = action.defaultVideo.name;
                 }
                 else if (action.isFail)
                 {
