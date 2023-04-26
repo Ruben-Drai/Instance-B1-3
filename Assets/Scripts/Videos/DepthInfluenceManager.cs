@@ -19,7 +19,6 @@ public class DepthInfluenceManager : MonoBehaviour
         if (instance == null) instance = gameObject;
         else Destroy(gameObject);
         DontDestroyOnLoad(gameObject);
-
     }
     private void Update()
     {
