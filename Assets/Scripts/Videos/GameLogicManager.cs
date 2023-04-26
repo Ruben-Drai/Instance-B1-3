@@ -194,7 +194,7 @@ public class GameLogicManager : MonoBehaviour
         if (action.Pause) Video.Pause(true);
         else Video.ChangeSpeed((float)(1 / (action.ActionDuration / (action.ActionEnd - action.ActionStart))));
 
-        Inventory.isInRoomPnC = action.ShowInventory;
+        
         if (!Video.instance.GetComponent<VideoPlayer>().isLooping)
             Video.Pause(true);
 
@@ -205,6 +205,7 @@ public class GameLogicManager : MonoBehaviour
 
         while (isInPnC)
         {
+            Inventory.isInRoomPnC = action.ShowInventory;
             //decreases only during the time the image is stopped, as such global timer doesn't decrease when the video is playing
             if (action.isUsingGlobalTime)
             {
@@ -294,7 +295,7 @@ public class GameLogicManager : MonoBehaviour
         action = new();
         Video.isInAction = false;
         CoroutineFinished = true;
-        yield return null;
         Inventory.isInRoomPnC = false;
+        yield return null;
     }
 }

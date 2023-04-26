@@ -37,7 +37,10 @@ public class UI : MonoBehaviour
 
     public void SkipButton()
     {
-        if (Video.instance.GetComponent<Video>().IsPlaying() && !Video.isInAction && lastSkippedTo != Video.instance.GetComponent<Video>().actionList[Video.currentActionIndex].ActionStart - 1)
+        if (Video.instance.GetComponent<Video>().IsPlaying() 
+            && !Video.isInAction 
+            && lastSkippedTo != Video.instance.GetComponent<Video>().actionList[Video.currentActionIndex].ActionStart - 1 
+            && Video.instance.GetComponent<Video>().actionList.Count!=0)
         {
             lastSkippedTo = Video.instance.GetComponent<Video>().actionList[Video.currentActionIndex].ActionStart - 1;
             Video.instance.GetComponent<VideoPlayer>().time = lastSkippedTo;
