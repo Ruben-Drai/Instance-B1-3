@@ -73,7 +73,7 @@ public class DepthInfluenceManager : MonoBehaviour
             }
             else if (dependencies.Comparators[0].sign == "-")
             {
-                int result = int.Parse(dependencies.Comparators[0].value) - int.Parse(instance.GetComponent<DepthInfluenceManager>().Memory[instance.GetComponent<DepthInfluenceManager>().Memory.IndexOf(dependencies.variable.ToString()) + 1]);
+                int result = int.Parse(instance.GetComponent<DepthInfluenceManager>().Memory[instance.GetComponent<DepthInfluenceManager>().Memory.IndexOf(dependencies.variable.ToString()) + 1]) - int.Parse(dependencies.Comparators[0].value);
                 instance.GetComponent<DepthInfluenceManager>().Memory[instance.GetComponent<DepthInfluenceManager>().Memory.IndexOf(dependencies.variable.ToString()) + 1] = result.ToString();
             }
         }

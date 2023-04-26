@@ -233,7 +233,11 @@ public class GameLogicManager : MonoBehaviour
                                 if (DepthInfluenceManager.CheckDependencies(action.TouchInputs[i].dependencies[u]) != null)
                                 {
                                     isAlt = DepthInfluenceManager.CheckDependencies(action.TouchInputs[i].dependencies[u]);
-                                    altIndex = u;
+                                    if ((bool)isAlt)
+                                    {
+                                        altIndex = u;
+                                        break;
+                                    }
                                 }
 
                             }
