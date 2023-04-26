@@ -6,6 +6,7 @@ public class DepthInfluenceManager : MonoBehaviour
 {
     public List<string> Memory;
     public static GameObject instance;
+    public float TimeElapsed=0f;
     // Start is called before the first frame update
     private void Start()
     {
@@ -28,6 +29,10 @@ public class DepthInfluenceManager : MonoBehaviour
         else Destroy(gameObject);
 
         if (SceneManager.GetActiveScene().name != "GameOver") DontDestroyOnLoad(gameObject);
+    }
+    private void Update()
+    {
+        TimeElapsed += Time.deltaTime;
     }
     public static bool? CheckDependencies(Dependencies dependencies)
     {
