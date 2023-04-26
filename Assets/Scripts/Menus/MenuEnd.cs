@@ -25,6 +25,8 @@ public class MenuEnd : MonoBehaviour
     }
     private void Awake()
     {
+        CollectedItems = 0;
+
         TimeElapsed = DepthInfluenceManager.instance.GetComponent<DepthInfluenceManager>().TimeElapsed;
         if (DepthInfluenceManager.GetValue("Wallet") == "1") CollectedItems++;
         if (DepthInfluenceManager.GetValue("Charger") == "1") CollectedItems++;
@@ -44,7 +46,7 @@ public class MenuEnd : MonoBehaviour
         else Lives = "You arrived late";
 
         collectedItemsText.text = "Items collected : " + CollectedItems.ToString() + "/5";
-        BruceReputText.text = "Reputation with Bruce : " + BruceReput;
+        BruceReputText.text = "Reputation with Brice : " + BruceReput;
         WantedText.text = "You are " + Wanted;
         LivesText.text = Lives;
     }
