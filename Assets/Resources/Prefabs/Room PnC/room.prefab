@@ -197,6 +197,7 @@ GameObject:
   - component: {fileID: 6262770462591997922}
   - component: {fileID: 6262770462591997923}
   - component: {fileID: 6262770462591997948}
+  - component: {fileID: 1486553433614679575}
   m_Layer: 0
   m_Name: room
   m_TagString: Untagged
@@ -305,6 +306,19 @@ MonoBehaviour:
       isLeading: 1
       prefab: {fileID: 719332578897824492, guid: bf598853a5897884eb4b0ae01886ef41, type: 3}
       dependencies: []
+--- !u!114 &1486553433614679575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6262770462591997949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90bcb5e1e5f8a994f8e9b6504a03e67c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  play: 1
 --- !u!1 &6262770462623451107
 GameObject:
   m_ObjectHideFlags: 0

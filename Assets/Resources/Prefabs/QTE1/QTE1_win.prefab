@@ -139,6 +139,7 @@ GameObject:
   - component: {fileID: 7605135204391807668}
   - component: {fileID: 7605135204391807671}
   - component: {fileID: 7605135204391807670}
+  - component: {fileID: -7295748513552437329}
   m_Layer: 0
   m_Name: QTE1_win
   m_TagString: Untagged
@@ -289,6 +290,19 @@ MonoBehaviour:
     globalTimeSet: 0
     KeyInputs: []
     TouchInputs: []
+--- !u!114 &-7295748513552437329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7605135204391807665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90bcb5e1e5f8a994f8e9b6504a03e67c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  play: 0
 --- !u!1001 &5108064799243789317
 PrefabInstance:
   m_ObjectHideFlags: 0
