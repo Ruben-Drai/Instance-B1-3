@@ -122,7 +122,13 @@ MonoBehaviour:
     - button: {fileID: 7542997244287330526}
       isLeading: 1
       prefab: {fileID: 1081695067327105519, guid: d0fe51e9686895d4c8149c2fd5ca2561, type: 3}
-      dependencies: []
+      dependencies:
+      - type: 1
+        variable: 5
+        Comparators:
+        - sign: =
+          value: 1
+        altPrefab: {fileID: 0}
 --- !u!1 &7542997242299086758
 GameObject:
   m_ObjectHideFlags: 0
