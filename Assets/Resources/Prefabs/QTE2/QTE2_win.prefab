@@ -89,6 +89,7 @@ MonoBehaviour:
   IsEnding: 0
   ShowClock: 0
   IsCheckPoint: 1
+  Music: {fileID: 8794074340771947483}
   actionList:
   - type: 0
     Pause: 0

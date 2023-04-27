@@ -81,20 +81,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3183cc0e35d4f1348b12701cbe6f4894, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsEnding: 0
   ShowClock: 1
   IsCheckPoint: 0
+  Music: {fileID: 0}
   actionList:
   - type: 0
     Pause: 0
     ShowInventory: 0
-    isFail: 0
-    HasDefault: 1
+    isFail: 1
+    HasDefault: 0
     setTimer: 0
     isUsingGlobalTime: 0
     defaultVideo: {fileID: 0}
     ActionStart: 0
-    ActionEnd: 2
-    ActionDuration: 2
+    ActionEnd: 2.7
+    ActionDuration: 2.7
     globalTimeSet: 0
     KeyInputs:
     - keys: 61000000
@@ -104,7 +106,7 @@ MonoBehaviour:
       prefab: {fileID: 1081695067327105519, guid: d0fe51e9686895d4c8149c2fd5ca2561, type: 3}
       dependencies:
       - type: 1
-        variable: 4
+        variable: 5
         Comparators:
         - sign: =
           value: 1

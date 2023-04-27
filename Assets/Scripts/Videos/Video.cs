@@ -9,6 +9,7 @@ public class Video : MonoBehaviour
     public bool IsEnding;
     public bool ShowClock;
     public bool IsCheckPoint;
+    public AudioSource Music;
     public List<Action> actionList;
     public static int currentActionIndex = 0;
     public static bool isInAction = false;
@@ -83,6 +84,14 @@ public class Video : MonoBehaviour
                 player.Pause();
             else
                 player.Play();
+
+        if (instance.GetComponent<Video>().Music != null)
+        {
+            if(Pause)
+                instance.GetComponent<Video>().Music.Pause();
+            else
+                instance.GetComponent<Video>().Music.UnPause();
+        }
 
     }
     public static double? GetCurrentTime()

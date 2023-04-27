@@ -84,6 +84,7 @@ MonoBehaviour:
   IsEnding: 0
   ShowClock: 0
   IsCheckPoint: 0
+  Music: {fileID: 0}
   actionList:
   - type: 0
     Pause: 0
@@ -97,7 +98,18 @@ MonoBehaviour:
     ActionEnd: 4.9
     ActionDuration: 0
     globalTimeSet: 0
-    KeyInputs: []
+    KeyInputs:
+    - keys: 
+      buttonSprites: []
+      isLeading: 0
+      prefab: {fileID: 0}
+      dependencies:
+      - type: 1
+        variable: 7
+        Comparators:
+        - sign: +
+          value: 2
+        altPrefab: {fileID: 0}
     TouchInputs: []
 --- !u!82 &5852351719026552333
 AudioSource:

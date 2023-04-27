@@ -19,7 +19,7 @@ public class ScenesManager : MonoBehaviour
                 "Laptop","0",
                 "Cap","0",
                 "Wanted","0",
-                "BruceReput","3",
+                "BruceReput","0",
                 "Lives","3",
             };
         }

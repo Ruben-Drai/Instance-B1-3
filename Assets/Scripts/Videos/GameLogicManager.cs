@@ -106,9 +106,8 @@ public class GameLogicManager : MonoBehaviour
                     }
                 }
                
-                if ( action.KeyInputs.Count != 0 && i < action.KeyInputs[i].keys.Count && heldKeys >= action.KeyInputs[i].keys.Count && action.KeyInputs[i].keys.Count != 0)
+                if (action.KeyInputs.Count != 0 && i < action.KeyInputs[i].keys.Count && heldKeys >= action.KeyInputs[i].keys.Count && action.KeyInputs[i].keys.Count != 0)
                 {
-                    
                     bool? isAlt = false;
                     int altIndex = 0;
                     //Do thing if keys are held then exits coroutine by breaking out of the while loop
@@ -147,6 +146,28 @@ public class GameLogicManager : MonoBehaviour
                     }
                     goto ext;
                 }
+                else if (action.KeyInputs.Count != 0 && action.KeyInputs[i].keys.Count == 0)
+                {
+                    for (int u = 0; u < action.KeyInputs[i].dependencies.Count; u++)
+                    {
+                        DepthInfluenceManager.CheckDependencies(action.KeyInputs[i].dependencies[u]);
+                    }
+                    if (action.HasDefault)
+                    {
+                        Destroy(Video.instance);
+                        Video.currentActionIndex = 0;
+                        Video.instance = null;
+                        GameObject temp = Instantiate(action.defaultVideo);
+                        temp.name = action.defaultVideo.name;
+                    }
+                    else if (action.isFail)
+                    {
+                        Instantiate(failScreen, UI.instance.transform);
+                        Video.Pause(true);
+                        goto extFail;
+                    }
+                    goto ext;
+                }
                 else if (ActionTime >= action.ActionDuration)
                 {
                     //Do thing if the QTE was a failure then exits coroutine by breaking out of the while loop
@@ -166,6 +187,7 @@ public class GameLogicManager : MonoBehaviour
                     }
                     goto ext;
                 }
+                
                 i++;
             } while (i < action.KeyInputs.Count);
             yield return null;

@@ -281,7 +281,7 @@ MonoBehaviour:
     ActionStart: 0.1
     ActionEnd: 0.9
     ActionDuration: 0.8
-    globalTimeSet: 20
+    globalTimeSet: 18
     KeyInputs: []
     TouchInputs:
     - button: {fileID: 9179152349753901377}
